@@ -4,4 +4,4 @@
       src: 99-k8s.conf
       dest: /etc/sysctl.d/99-k8s.conf
   - name: Load system parameters
-    shell: sysctl -p /etc/sysctl.d/99-k8s.conf
+    shell: modprobe br_netfilter && sysctl -p /etc/sysctl.d/99-k8s.conf

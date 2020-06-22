@@ -1,3 +1,10 @@
+# 初始化环境
+- name: init
+  hosts: k8s
+  roles:
+    - init
+
+# 创建证书
 - name: cert
   hosts: local
   roles:

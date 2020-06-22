@@ -3,18 +3,15 @@
       name: ['epel-release', 'yum-utils', 'device-mapper-persistent-data', 'lvm2']
       state: present
   - name: Add docker-ce repo
-      shell: yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    shell: yum-config-manager --add-repo {{ docker_repo }}
 #  - name: Add kubernetes repo
 #    copy:
 #      src: kubernetes.repo
 #      dest: /etc/yum.repos.d/kubernetes.repo
   - name: Install new packages
     yum:
-      name: "{{ item }}"
+      name: ['docker-ce-{{ docker_version }}', 'docker-ce-cli-{{ docker_version }}']
       state: present
-    with_items:
-      - docker-ce-{{ docker_version }}
-      - docker-ce-cli-{{ docker_version }}
   - name: Create /etc/docker directory
     file:
       path: /etc/docker

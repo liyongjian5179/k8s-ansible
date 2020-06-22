@@ -27,7 +27,7 @@ flannel_version: 0.12.0
 
 # cni-plugins 版本
 # https://github.com/containernetworking/plugins/releases/download/v{{cni_plugins_version}}/cni-plugins-linux-amd64-v{{cni_plugins_version}}.tgz
-cni_plugins_version:0.8.6
+cni_plugins_version: 0.8.6
 
 # docker 源地址
 docker_repo: http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo

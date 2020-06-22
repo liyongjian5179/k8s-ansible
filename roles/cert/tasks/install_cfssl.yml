@@ -3,20 +3,31 @@
       name: "{{ package_root_dir }}/cfssl"
       state: directory
       recurse: true
+  
+  - name: "grep cfssl"
+    shell:
+      ls "{{ package_root_dir }}/cfssl/cfssl_linux-amd64"
+    register: cfssl_exist
+    ignore_errors: yes
+
   - name: "DownLoad cfssl "
     get_url:
       url: "{{ item }}"
       dest: "{{ package_root_dir }}/cfssl"
+      timeout: 120
+      mode: 0755
     with_items:
       - https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
       - https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
       - https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
+    when: cfssl_exist is failed
+
   - name: "Copy cfssl to /usr/local/bin/"
-    file:
+    copy:
       src: "{{ package_root_dir }}/cfssl/{{ item.src }}"
       dest: /usr/local/bin/{{ item.dest }}
       mode: 0755
     with_items:
-      - {src:"cfssl_linux-amd64", value: "cfssl"}
-      - {src:"cfssljson_linux-amd64", value: "cfssljson"}
-      - {src:"cfssl-certinfo_linux-amd64", value: "cfssl-certinfo"}
+      - {src: "cfssl_linux-amd64", dest: "cfssl"}
+      - {src: "cfssljson_linux-amd64", dest: "cfssljson"}
+      - {src: "cfssl-certinfo_linux-amd64", dest: "cfssl-certinfo"}

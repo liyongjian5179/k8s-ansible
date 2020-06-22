@@ -1,10 +1,17 @@
 ---
-
-- include: disable_selinux.yml
+- name: disable_selinux
+  include: disable_selinux.yml
+  tags: disable_selinux
 - include: stop_firewall.yml
+  tags: stop_firewall
 - include: disable_swap.yml 
+  tags: disable_swap
 - include: sysctl.yml
+  tags: sysctl
 - include: timezone.yml
+  tags: timezone
 - include: install_docker.yml
+  tags: install_docker
 - include: copy_hostfile.yml 
+  tags: copy_hostfile
 

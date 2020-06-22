@@ -3,9 +3,11 @@
   hosts: k8s
   roles:
     - init
+  tags: init
 
 # 创建证书
 - name: cert
   hosts: local
   roles:
     - cert
+  tags: cert

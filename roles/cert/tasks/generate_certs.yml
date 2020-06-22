@@ -1,0 +1,66 @@
+- name: "Make Certs Directory"
+  file:
+    name: "{{ cert_root_dir }}"
+    state: directory
+    recurse: true
+
+- name: "Generate ca-config.json"
+  template:
+    src: ca-config.json.j2
+    dest: "{{ cert_root_dir }}/ca-config.json"
+
+- name: "Generate ca-csr.json"
+  template:
+    src: ca-csr.json.j2
+    dest: "{{ cert_root_dir }}/ca-csr.json"
+
+- name: "Generate CA File and Key File"
+  shell:
+    cfssl gencert -initca ca-csr.json | cfssljson -bare ca .
+  args:
+    chdir: "{{ cert_root_dir }}/"
+
+- name: "Generate server-csr.json"
+  template:
+    src: server-csr.json.j2
+    dest: "{{ cert_root_dir }}/server-csr.json"
+
+- name: "Generate Server Certs File and Key File"
+  shell:
+    cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes server-csr.json | cfssljson -bare server
+  args:
+    chdir: "{{ cert_root_dir }}/"
+
+- name: "Generate admin-csr.json"
+  template:
+    src: admin-csr.json.j2
+    dest: "{{ cert_root_dir }}/"
+
+- name: "Generate Admin Certs File and Key File"
+  shell:
+    cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes admin-csr.json | cfssljson -bare admin
+  args:
+    chdir: "{{ cert_root_dir }}/"
+
+- name: "Generate kube-proxy-csr.json"
+  template:
+    src: kube-proxy-csr.json.j2
+    dest: "{{ cert_root_dir }}/"
+
+- name: "Generate Kube-proxy Certs File and Key File"
+  shell:
+    cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
+  args:
+    chdir: "{{ cert_root_dir }}/"
+
+- name: "Generate metrics-servery-csr.json"
+  template:
+    src: metrics-server-csr.json.j2
+    dest: "{{ cert_root_dir }}/"
+
+- name: "Generate Metrics-server Certs File and Key File"
+  shell:
+    cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes metrics-server-csr.json | cfssljson -bare metrics-server
+  args:
+    chdir: "{{ cert_root_dir }}/"
+

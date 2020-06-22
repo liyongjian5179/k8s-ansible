@@ -1,5 +1,6 @@
 ---
 
 - include: install_cfssl.yml
-
-    
+  tags: install_cfssl
+- include: generate_certs.yml
+  tags: generate_certs

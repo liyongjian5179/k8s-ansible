@@ -13,3 +13,9 @@
 10.10.10.131 centos7-d
 10.10.10.132 centos7-e
 ```
+
+
+## 执行
+```bash
+ansible-playbook -i inventories/hosts  site.yaml
+```

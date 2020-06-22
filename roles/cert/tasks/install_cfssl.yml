@@ -4,7 +4,7 @@
       state: directory
       recurse: true
   
-  - name: "grep cfssl"
+  - name: "Check cfssl exist or not"
     shell:
       ls "{{ package_root_dir }}/cfssl/cfssl_linux-amd64"
     register: cfssl_exist

@@ -1,0 +1,3 @@
+# CA 证书相关参数
+CA_EXPIRY: "876000h"
+CERT_EXPIRY: "438000h"

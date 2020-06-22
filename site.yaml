@@ -1,0 +1,4 @@
+- name: cert
+  hosts: local
+  roles:
+    - cert

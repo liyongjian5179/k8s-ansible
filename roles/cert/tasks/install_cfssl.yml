@@ -1,0 +1,22 @@
+  - name: "Make cfssl dir"
+    file:
+      name: "{{ package_root_dir }}/cfssl"
+      state: directory
+      recurse: true
+  - name: "DownLoad cfssl "
+    get_url:
+      url: "{{ item }}"
+      dest: "{{ package_root_dir }}/cfssl"
+    with_items:
+      - https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+      - https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+      - https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
+  - name: "Copy cfssl to /usr/local/bin/"
+    file:
+      src: "{{ package_root_dir }}/cfssl/{{ item.src }}"
+      dest: /usr/local/bin/{{ item.dest }}
+      mode: 0755
+    with_items:
+      - {src:"cfssl_linux-amd64", value: "cfssl"}
+      - {src:"cfssljson_linux-amd64", value: "cfssljson"}
+      - {src:"cfssl-certinfo_linux-amd64", value: "cfssl-certinfo"}

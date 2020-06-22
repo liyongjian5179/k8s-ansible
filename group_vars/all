@@ -4,6 +4,9 @@
 # 工作目录
 workdir: /opt
 
+# 包存放路径
+package_root_dir: /opt/pkg
+
 # ansible主控机机器证书存放位置
 cert_root_dir: /opt/ssl
 

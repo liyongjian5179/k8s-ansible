@@ -1,0 +1,36 @@
+
+
+
+# 工作目录
+workdir: /opt
+
+# ansible主控机机器证书存放位置
+cert_root_dir: /opt/ssl
+
+# docker 版本
+docker_version: 19.03.10
+
+# etcd 版本
+# https://github.com/etcd-io/etcd/releases/download/v{{etcd_version}}/etcd-v{{etcd_version}}-linux-amd64.tar.gz
+etcd_version: 3.3.19
+
+# kubernetes 版本
+# https://dl.k8s.io/v{{kubernetes_version}}/kubernetes-server-linux-amd64.tar.gz
+kubernetes_version: 1.18.3
+
+# flannel 版本
+# https://github.com/coreos/flannel/releases/download/v{{flannel_version}}/flannel-v{{flannel_version}}-linux-amd64.tar.gz
+flannel_version: 0.12.0
+
+# cni-plugins 版本
+# https://github.com/containernetworking/plugins/releases/download/v{{cni_plugins_version}}/cni-plugins-linux-amd64-v{{cni_plugins_version}}.tgz
+cni_plugins_version:0.8.6
+
+# docker 源地址
+docker_repo: http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+# flannel规划地址网段信息
+flannel_network: '{"Network":"10.244.0.0/16", "Backend":{"Type": "vxlan"}}'
+
+# docker 加速器
+mirror_accelerator: https://ajpb7tdn.mirror.aliyuncs.com

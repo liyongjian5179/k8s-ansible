@@ -1,0 +1,8 @@
+# Disable Swap
+  - name: Exec swapoff command
+    shell: swapoff -a
+  - name: Change fstab file
+    replace:
+      path: /etc/fstab
+      regexp: '^([/|U].+swap.+)$'
+      replace: '#\1'

@@ -1,0 +1,10 @@
+{
+   "exec-opts": ["native.cgroupdriver=systemd"],
+   "registry-mirrors": ["https://ajpb7tdn.mirror.aliyuncs.com"],
+   "log-driver": "json-file",
+   "log-opts": {
+       "max-size": "100m",
+       "max-file": "10"
+   },
+   "oom-score-adjust": -1000
+}

@@ -1,0 +1,39 @@
+# Create some dir
+
+- name: "Make Master Directory"
+  hosts: masters
+  file:
+    name: "{{workdir}}/"
+    state: directory
+    recurse: true
+  with_items:
+    - etcd
+    - etcd/bin
+    - etcd/cfg
+    - etcd/ssl
+    - etcd/data
+    - kubernetes
+    - kubernetes/bin
+    - kubernetes/cfg
+    - kubernetes/ssl
+    - kubernetes/logs
+    - kubernetes/logs/kubelet
+    - kubernetes/logs/kube-proxy
+    - kubernetes/logs/kube-scheduler
+    - kubernetes/logs/kube-apiserver
+    - kubernetes/logs/kube-controller-manager
+
+- name: "Make Nodes Directory"
+  hosts: nodes
+  file:
+    name: "{{workdir}}/"
+    state: directory
+    recurse: true
+  with_items:
+    - kubernetes
+    - kubernetes/bin
+    - kubernetes/cfg
+    - kubernetes/ssl
+    - kubernetes/logs
+    - kubernetes/logs/kubelet
+    - kubernetes/logs/kube-proxy

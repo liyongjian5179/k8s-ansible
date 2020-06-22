@@ -1,0 +1,14 @@
+# Start docker service
+  - name: Create /etc/docker directory
+    file:
+      path: /etc/docker
+      state: directory
+  - name: Copy docker daemon.json file
+    copy:
+      src: daemon.json
+      dest: /etc/docker/daemon.json
+  - name: Started docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes

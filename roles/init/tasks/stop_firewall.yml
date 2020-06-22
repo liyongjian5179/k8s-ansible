@@ -1,0 +1,15 @@
+# Turn off the firewall
+  - name: Stop firewalld
+    service:
+      name: firewalld
+      state: stopped
+# The situation iptables rule
+  - name: Enable iptables
+    service:
+      name: iptables
+      state: started
+      enabled: yes
+  - name: Clean iptables
+    shell: iptables -F && iptables -X && iptables -F -t nat && iptables -X -t nat && iptables -P FORWARD ACCEPT
+  - name: Save iptables rules
+    shell: service iptables save

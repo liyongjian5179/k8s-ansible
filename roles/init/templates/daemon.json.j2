@@ -1,0 +1,12 @@
+{
+   "exec-opts": ["native.cgroupdriver=systemd"],
+   {% if mirror_accelerator is not none %}
+   "registry-mirrors": ["{{ mirror_accelerator }}"],
+   {% endif %}
+   "log-driver": "json-file",
+   "log-opts": {
+       "max-size": "100m",
+       "max-file": "10"
+   },
+   "oom-score-adjust": -1000
+}

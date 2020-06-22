@@ -1,0 +1,9 @@
+# Set the time zone Shanghai
+  - name: Set the time zone Shanghai
+    shell: timedatectl set-timezone Asia/Shanghai
+# Start chronyd service,Set clock synchronization
+#  - name: Set clock synchronization
+#    service:
+#      name: chronyd
+#      state: started
+#      enabled: yes

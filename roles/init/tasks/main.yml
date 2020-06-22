@@ -1,0 +1,10 @@
+---
+
+- include: disable_selinux.yml
+- include: stop_firewall.yml
+- include: disable_swap.yml 
+- include: sysctl.yml
+- include: timezone.yml
+- include: install_docker.yml
+- include: copy_hostfile.yml 
+

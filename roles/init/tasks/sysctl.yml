@@ -1,0 +1,7 @@
+# Set system parameters
+  - name: copy system parameters config file
+    copy:
+      src: 99-k8s.conf
+      dest: /etc/sysctl.d/99-k8s.conf
+  - name: Load system parameters
+    shell: sysctl -p /etc/sysctl.d/99-k8s.conf

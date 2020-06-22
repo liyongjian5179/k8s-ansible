@@ -1,3 +1,8 @@
 # CA 证书相关参数
+# 100 年
 CA_EXPIRY: "876000h"
+# 50 年
 CERT_EXPIRY: "438000h"
+
+# 证书更新策略 [stay|update]
+CERT_POLICY: stay

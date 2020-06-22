@@ -7,7 +7,7 @@ workdir: /opt
 package_root_dir: /opt/pkg
 
 # 证书存放路径
-cert_root_dir: /opt/.ssl
+cert_root_dir: /opt/ssl
 
 # ansible主控机机器证书存放位置
 cert_root_dir: /opt/ssl

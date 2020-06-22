@@ -2,5 +2,24 @@
 
 - include: install_cfssl.yml
   tags: install_cfssl
+  
+- name: "Make Certs Directory"
+  file:
+    name: "{{ cert_root_dir }}"
+    state: directory
+    recurse: true
+
+- name: "Check Certs exist or not"
+  shell:
+    ls "{{ cert_root_dir }}" |wc -l
+  register: certs_number
+  # ignore_errors: yes
+
+- name: "Debug File numbers"
+  debug:
+    msg: "{{ certs_number.stdout }}"
+    #msg: "{{ certs_number['stdout'] }}"
+
 - include: generate_certs.yml
   tags: generate_certs
+  when: certs_number.stdout | int <=20 or (CERT_POLICY) == "update"

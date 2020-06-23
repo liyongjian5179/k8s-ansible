@@ -17,5 +17,6 @@
 - name: distribute_scheduler
   include: distribute_scheduler.yml
   tags: distribute_scheduler
-
-  
+- name: create_some_roles
+  include: create_some_roles.yml
+  tags: create_some_roles  

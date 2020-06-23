@@ -63,9 +63,9 @@ bootstrap_token: d908e9988e51cae3b76ecae1ebacaef3
 service_port_range: 30000-50000
 
 # 资源保留，Node 节点内存保留值为三者相加之和
-system-reserved-memory: 30Mi
-kube-reserved-memory: 40Mi
-eviction-hard-memory: 30Mi
+system_reserved_memory: 30Mi
+kube_reserved_memory: 40Mi
+eviction_hard_memory: 30Mi
 
 # flannel规划地址网段信息
 flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'

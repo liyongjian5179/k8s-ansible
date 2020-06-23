@@ -14,7 +14,7 @@
 - name: "Copy File tls-instrucrs-csr.yaml"
   copy:
     src: tls-instrucrs-csr.yaml
-    dest: {{ workdir }}/yamls
+    dest: "{{ workdir }}/yamls"
   run_once: true  
 
 - name: "Create Approve CSR ClusterRole" 

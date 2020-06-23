@@ -18,3 +18,10 @@
   roles:
     - etcd
   tags: etcd
+
+# 安装 masters
+- name: Install Master Cluster
+  hosts: masters
+  roles:
+    - master
+  tags: master

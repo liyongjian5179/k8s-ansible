@@ -1,0 +1,10 @@
+---
+- name: create_dir
+  include: create_dir.yml
+  tags: create_dir
+- name: genarate_kube_config
+  include: genarate_kube_config.yml
+
+
+
+  

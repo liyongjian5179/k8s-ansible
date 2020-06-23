@@ -1,0 +1,7 @@
+- name: "Distribute K8s Kubelet Binary File To Localhost"
+  copy:
+    src: "{{ package_root_dir }}/k8s/{{ etcd_version }}/kubernetes/server/bin/kubectl"
+    dest: "/usr/local/bin"
+    mode: 0755
+  connection: local 
+

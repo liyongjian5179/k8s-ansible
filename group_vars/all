@@ -47,9 +47,15 @@ kubernetes_service_ip: 10.96.0.1
 # coredns 地址
 coredns_service_ip: 10.96.0.10
 
-# 可访问 api-server 的 LB|NG 地址，用于生成证书
+# 可访问 api-server 的 VIP|LB|NG 地址，用于生成证书，如果有多个则写多个，以逗号分隔
 apiserver_lb_address: 10.10.10.127,lb.5179.top
 
+# 如果是高可用集群，需要写一台 VIP|LB|NG 地址，建议写内网 LB 地址，用于生成kubeconfig
+apiserver_master_addr: lb.5179.top
 
+# 可以通过 `head -c 16 /dev/urandom | od -An -t x | tr -d ' '`生成token
+bootstrap_token: d908e9988e51cae3b76ecae1ebacaef3
 
+# service端口范围
+service_port_range: 30000-50000
 

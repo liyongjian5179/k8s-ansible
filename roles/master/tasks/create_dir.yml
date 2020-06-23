@@ -1,0 +1,16 @@
+# Create some dir
+
+- name: "Make Master Directory"
+  file:
+    name: "{{workdir}}/{{ item }}"
+    state: directory
+    recurse: true
+  with_items:
+    - kubernetes
+    - kubernetes/bin
+    - kubernetes/cfg
+    - kubernetes/ssl
+    - kubernetes/logs
+    - kubernetes/logs/kube-scheduler
+    - kubernetes/logs/kube-apiserver
+    - kubernetes/logs/kube-controller-manager

@@ -1,0 +1,17 @@
+KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=false \
+--v=2 \
+--log-dir={{ workdir}}/kubernetes/logs/kube-controller-manager \
+--master=127.0.0.1:8080 \
+--leader-elect=true \
+--bind-address=0.0.0.0 \
+--service-cluster-ip-range={{ service_network }} \
+--cluster-name=kubernetes \
+--cluster-signing-cert-file={{ workdir}}/kubernetes/ssl/ca.pem \
+--cluster-signing-key-file={{ workdir}}/kubernetes/ssl/ca-key.pem  \
+--service-account-private-key-file={{ workdir}}/kubernetes/ssl/ca-key.pem \
+--experimental-cluster-signing-duration=87600h0m0s \
+--feature-gates=RotateKubeletServerCertificate=true \
+--feature-gates=RotateKubeletClientCertificate=true \
+--allocate-node-cidrs=true \
+--cluster-cidr={{ pod_network }} \
+--root-ca-file={{ workdir}}/kubernetes/ssl/ca.pem"

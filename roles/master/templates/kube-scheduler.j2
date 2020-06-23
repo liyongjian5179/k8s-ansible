@@ -1,0 +1,6 @@
+KUBE_SCHEDULER_OPTS="--logtostderr=false \
+--v=2 \
+--log-dir={{ workdir}}/kubernetes/logs/kube-scheduler \
+--master=127.0.0.1:8080 \
+--address=0.0.0.0 \
+--leader-elect"

@@ -1,4 +1,7 @@
 ---
+- name: distribute_link_etcd_cert
+  include: distribute_link_etcd_cert.yml
+  tags: distribute_link_etcd_cert
 - name: distribute_cni_plugins
   include: distribute_cni_plugins.yml
   tags: distribute_cni_plugins

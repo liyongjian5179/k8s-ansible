@@ -3,7 +3,7 @@
     src: "{{ package_root_dir }}/flannel/{{ flannel_version }}/{{ item }}"
     dest: "{{ workdir }}/kubernetes/bin"
     mode: 0755
-  with-items:
+  with_items:
     - flanneld
     - mk-docker-opts.sh
 

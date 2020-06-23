@@ -32,3 +32,17 @@
   roles:
     - node
   tags: node
+
+# 安装 flannel
+- name: Install Network Plugins
+  hosts: nodes
+  roles:
+    - network
+  tags: network
+
+# 安装 coredns
+- name: Install Coredns 
+  hosts: masters
+  roles:
+    - coredns
+  tags: coredns

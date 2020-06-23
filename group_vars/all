@@ -76,5 +76,5 @@ network_type: flannel
 # flannel 网络模式
 flannel_network_mode: vxlan
 
-# 是否向 Etcd 中写入网段信息，例如：'{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
-config_network: no
+# coredns 镜像版本 注意对应关系 https://github.com/coredns/deployment/blob/master/kubernetes/CoreDNS-k8s_version.md
+coredns_image_tag: 1.6.7

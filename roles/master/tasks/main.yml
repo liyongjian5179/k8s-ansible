@@ -14,6 +14,8 @@
 - name: distribute_controller_manager
   include: distribute_controller_manager.yml
   tags: distribute_controller_manager
-
+- name: distribute_scheduler
+  include: distribute_scheduler.yml
+  tags: distribute_scheduler
 
   

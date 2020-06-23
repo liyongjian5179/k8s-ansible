@@ -1,0 +1,16 @@
+- name: "Copy Kube-scheduler Configuration Files"
+  template:
+    src: kube-scheduler.j2
+    dest: "{{workdir}}/kubernetes/cfg/kube-scheduler"
+    
+- name: "Copy Kube-scheduler Systemd File"
+  template:
+    src: kube-scheduler.service.j2
+    dest: /usr/lib/systemd/system/kube-scheduler.service
+
+- name: "Start Kube-scheduler"
+  systemd:
+    name: kube-scheduler
+    state: restarted
+    enabled: true
+    daemon-reload: true

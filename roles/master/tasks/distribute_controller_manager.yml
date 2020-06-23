@@ -10,7 +10,7 @@
 
 - name: "Start Kube-controller-manager"
   systemd:
-    name: kube--controller-manager
+    name: kube-controller-manager
     state: restarted
     enabled: true
     daemon-reload: true

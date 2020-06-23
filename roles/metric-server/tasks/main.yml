@@ -6,7 +6,7 @@
 
 - name: "Copy Metrics.yaml Files"
   copy:
-    src: metrics.yaml.j2
+    src: metrics.yaml
     dest: "{{workdir}}/yamls/metrics.yaml"
 
 - name: "Run 'kubectl apply -f metrics.yaml'"

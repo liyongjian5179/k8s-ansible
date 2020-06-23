@@ -10,7 +10,7 @@
 - name: "Distribute K8s Certs And Kubeconfigs"
   copy:
     src: "{{ cert_root_dir }}/{{ item }}"
-    dest: "{{ workdir }}/kubernetes/ssl"
+    dest: "{{ workdir }}/kubernetes/cfg"
   with_items:
     - ca.pem
     - kube-proxy.kubeconfig

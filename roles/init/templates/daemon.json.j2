@@ -1,5 +1,5 @@
 {
-   "exec-opts": ["native.cgroupdriver=systemd"],
+   "exec-opts": ["native.cgroupdriver={{ cgroupdriver }}"],
    {% if mirror_accelerator is not none %}
    "registry-mirrors": ["{{ mirror_accelerator }}"],
    {% endif %}

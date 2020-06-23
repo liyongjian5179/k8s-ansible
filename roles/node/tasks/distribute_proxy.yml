@@ -1,6 +1,6 @@
 - name: "Copy Kube-proxy Configuration Files"
   template:
-    src: {{ item }}.j2
+    src: "{{ item }}.j2"
     dest: "{{ workdir}}/kubernetes/cfg/{{ item }}"
   with_items:
     - kube-proxy.conf

@@ -3,7 +3,7 @@ apiVersion: kubelet.config.k8s.io/v1beta1 # api版本
 address: 0.0.0.0 # 监听地址
 port: 10250 # 当前kubelet的端口
 readOnlyPort: 10255 # kubelet暴露的端口
-cgroupDriver: cgroupfs # 驱动，要与docker info显示的驱动一致
+cgroupDriver: {{ cgroupdriver }} # 驱动，要与docker info显示的驱动一致
 clusterDNS:
   - {{ coredns_service_ip }}
 clusterDomain: {{ cluster_domain }}  # 集群域
@@ -29,7 +29,7 @@ authorization:
 # Node 资源保留
 evictionHard:
   imagefs.available: 15%
-  memory.available: 300Mi
+  memory.available: {{ eviction-hard-memory }}
   nodefs.available: 10%
   nodefs.inodesFree: 5%
 evictionPressureTransitionPeriod: 5m0s

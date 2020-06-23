@@ -25,3 +25,10 @@
   roles:
     - master
   tags: master
+
+# 安装 nodes
+- name: Install Node Cluster
+  hosts: nodes
+  roles:
+    - node
+  tags: node

@@ -5,4 +5,9 @@
 - name: distribute_k8s_file
   include: distribute_k8s_file.yml
   tags: distribute_k8s_file
-
+- name: distribute_proxy
+  include: distribute_proxy.yml
+  tags: distribute_proxy
+- name: distribute_kubelet
+  include: distribute_kubelet.yml
+  tags: distribute_kubelet

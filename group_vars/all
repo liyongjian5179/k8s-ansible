@@ -29,8 +29,8 @@ docker_version: 19.03.10
 # docker 源地址
 docker_repo: http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
-# flannel规划地址网段信息
-flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
+# docker 的 cgroupDriver， kubelet 应与 docker 的一致
+cgroupdriver: systemd
 
 # docker 镜像加速器
 mirror_accelerator: https://ajpb7tdn.mirror.aliyuncs.com
@@ -62,3 +62,10 @@ bootstrap_token: d908e9988e51cae3b76ecae1ebacaef3
 # service端口范围
 service_port_range: 30000-50000
 
+# 资源保留，Node 节点内存保留值为三者相加之和
+system-reserved-memory: 30Mi
+kube-reserved-memory: 40Mi
+eviction-hard-memory: 30Mi
+
+# flannel规划地址网段信息
+flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'

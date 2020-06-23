@@ -7,14 +7,18 @@
     - kubelet
     - kube-proxy
 
-- name: "Distribute K8s Certs And Kubeconfigs"
+- name: "Distribute K8s Kubeconfigs"
   copy:
     src: "{{ cert_root_dir }}/{{ item }}"
     dest: "{{ workdir }}/kubernetes/cfg"
   with_items:
-    - ca.pem
     - kube-proxy.kubeconfig
     - bootstrap.kubeconfig
+
+- name: "Distribute K8s Certs"
+  copy:
+    src: "{{ cert_root_dir }}/ca.pem"
+    dest: "{{ workdir }}/kubernetes/ssl"
 
 - name: "Distribute Token.csv"
   copy:

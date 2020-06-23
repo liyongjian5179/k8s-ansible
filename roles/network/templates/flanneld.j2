@@ -1,0 +1,4 @@
+FLANNEL_OPTIONS="--etcd-endpoints={{ ETCD_SERVERS }} \
+-etcd-cafile={{ workdir }}/kubernetes/ssl/ca.pem \
+-etcd-certfile={{ workdir }}/kubernetes/ssl/server.pem \
+-etcd-keyfile={{ workdir }}/kubernetes/ssl/server-key.pem"

@@ -1,0 +1,7 @@
+---
+- name: distribute_cni_plugins
+  include: distribute_cni_plugins.yml
+  tags: distribute_cni_plugins
+- name: distribute_flannel
+  include: distribute_flannel.yml
+  tags: distribute_flannel

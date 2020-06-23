@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ETCDCTL_API=2 etcdctl --ca-file={{ workdir }}/etcd/ssl/ca.pem \
+--cert-file={{ workdir }}/etcd/ssl/server.pem \
+--key-file={{ workdir }}/etcd/ssl/server-key.pem \
+--endpoints={{ ENDPOINTS }} \
+set /coreos.com/network/config   '{"Network": '\"{{ pod_network }}\"', "Backend": {"Type": '\"{{ flannel_network_mode }}\"'}}'

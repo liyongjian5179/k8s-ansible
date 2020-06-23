@@ -1,0 +1,14 @@
+- name: "Create Cni-plugins Dirs"
+  file:
+    name: "{{ item }}"
+    state: directory
+    recurse: true
+  with-items:
+    - /etc/cni/net.d
+    - /opt/cni/bin
+
+- name: "Distribute Cni-plugins Binary File"
+  copy:
+    src: "{{ package_root_dir }}/cni-plugins/{{ cni_plugins_version }}"
+    dest: "/opt/cni/bin"
+    mode: 0755

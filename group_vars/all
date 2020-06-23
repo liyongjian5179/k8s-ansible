@@ -68,4 +68,13 @@ kube_reserved_memory: 40Mi
 eviction_hard_memory: 30Mi
 
 # flannel规划地址网段信息
-flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
+#flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
+
+# 网络插件类型
+network_type: flannel
+
+# flannel 网络模式
+flannel_network_mode: vxlan
+
+# 是否向 Etcd 中写入网段信息，例如：'{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
+config_network: no

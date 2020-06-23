@@ -1,0 +1,12 @@
+- name: "Copy Config_network.sh Files"
+  template:
+    src: config_network.sh.j2
+    dest: "{{workdir}}/etcd/bin/config_network.sh"
+    mode: 0755
+
+- name: "Run Config_network.sh"
+  shell:
+    "bash config_network.sh"
+  args:
+    chdir: "{{ workdir }}/etcd/bin"
+  run_once: true

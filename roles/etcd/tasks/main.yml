@@ -8,3 +8,6 @@
 - name: start_etcd
   include: start_etcd.yml
   tags: start_etcd
+- include: config_network.yml
+  tags: config_network
+  when: (config_network) == "update"

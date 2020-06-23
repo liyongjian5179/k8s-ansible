@@ -1,0 +1,7 @@
+- name: "Distribute Flannel Link Etcd Certs"
+  copy:
+    src: "{{ cert_root_dir }}/{{ item }}"
+    dest: "{{ workdir }}/kubernetes/ssl"
+  with_items:
+    - server.pem
+    - server-key.pem

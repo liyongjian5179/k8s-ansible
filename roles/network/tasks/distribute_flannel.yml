@@ -1,0 +1,31 @@
+- name: "Distribute Flannel Binary File"
+  copy:
+    src: "{{ package_root_dir }}/flannel/{{ flannel_version }}/{{ item }}"
+    dest: "{{ workdir }}/kubernetes/bin"
+    mode: 0755
+  with-items:
+    - flanneld
+    - mk-docker-opts.sh
+
+- name: "Distribute Flannel Conflist File"
+  template:
+    src: 10-flannel.conflist.j2
+    dest: "/etc/cni/net.d/10-flannel.conflist"
+
+- name: "Distribute Flannel Config File"
+  template:
+    src: flanneld.j2
+    dest: "{{ workdir }}/kubernetes/cfg/flanneld"
+
+- name: "Copy Flanneld Systemd File"
+  template:
+    src: flanneld.service.j2
+    dest: /usr/lib/systemd/system/flanneld.service
+
+- name: "Start Flannel"
+  systemd:
+    name: flanneld
+    state: restarted
+    enabled: true
+    daemon-reload: true
+

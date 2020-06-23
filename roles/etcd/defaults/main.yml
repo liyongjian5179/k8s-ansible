@@ -4,3 +4,5 @@ ETCD_CLUSTER: "{{ TMP_NODES.rstrip(',') }}"
 
 # etcd 集群初始状态 new/existing
 CLUSTER_STATE: "new"
+
+ENDPOINTS: "{% for host in groups['etcd'] %}https://{{ host }}:2379{% if not loop.last %},{% endif %}{% endfor %}"

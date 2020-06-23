@@ -1,13 +1,8 @@
-
-
 # 工作目录
 workdir: /opt
 
 # 包存放路径
 package_root_dir: /opt/pkg
-
-# 证书存放路径
-cert_root_dir: /opt/ssl
 
 # ansible主控机机器证书存放位置
 cert_root_dir: /opt/ssl
@@ -46,7 +41,7 @@ pod_network: 10.244.0.0/16
 # service 网段
 service_network: 10.96.0.0/12
 
-# kubernetes 内部地址
+# kubernetes 内部地址, 一般为 service 网段的第一个 IP 地址
 kubernetes_service_ip: 10.96.0.1
 
 # coredns 地址
@@ -54,5 +49,7 @@ coredns_service_ip: 10.96.0.10
 
 # 可访问 api-server 的 LB|NG 地址，用于生成证书
 apiserver_lb_address: 10.10.10.127,lb.5179.top
+
+
 
 

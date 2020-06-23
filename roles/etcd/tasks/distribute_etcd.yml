@@ -1,0 +1,50 @@
+- name: "Distribute ETCD Binary File"
+  copy:
+    src: "{{ package_root_dir }}/etcd/etcd-v{{ etcd_version }}-linux-amd64/{{ item }}"
+    dest: "{{ workdir }}/etcd/bin"
+  with_items:
+    - etcd
+    - etcdctl
+
+- name: "Distribute ETCD Certs"
+  copy:
+    src: "{{cert_root_dir}}/{{ item }}"
+    dest: "{{workdir}}/etcd/ssl/"
+    force: true
+  with_items: 
+    - ca.pem
+    - server-key.pem
+    - server.pem
+
+- name: "Copy ETCD Configuration Files"
+  template:
+    src: etcd-3.{{ etcd_version.split('.')[1] }}}.yml.j2
+    dest: "{{workdir}}/etcd/cfg/etcd.yml"
+    force: true
+  notify:
+    restart etcd
+
+#- name: "Copy ETCD Configuration Files"
+#  template:
+#    src: etcd-3.3.yml.j2
+#    dest: "{{workdir}}/etcd/cfg/etcd.yml"
+#    force: true
+#  when: etcd_version.startswith("3.3")
+#
+#- name: "Copy ETCD Configuration Files"
+#  template:
+#    src: etcd-3.4.yml.j2
+#    dest: "{{workdir}}/etcd/cfg/etcd.yml"
+#    force: true
+#  when: etcd_version.startswith("3.4")
+
+- name: "Write ETCD Command to Profile"
+  template:
+    src: etcdctl.sh.j2
+    dest: /etc/profile.d/etcd.sh
+    mode: 0755
+
+- name: "Copy ETCD Systemd File"
+  template:
+    src: etcd.service.j2
+    dest: /usr/lib/systemd/system/etcd.service

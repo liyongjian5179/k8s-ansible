@@ -1,0 +1,30 @@
+#etcd {{ etcd_version }}
+name: {{ NODE_NAME }}
+data-dir: {{ workdir }}/etcd/data
+listen-peer-urls: https://{{ inventory_hostname }}:2380
+listen-client-urls: https://{{ inventory_hostname }}:2379,https://127.0.0.1:2379
+
+advertise-client-urls: https://{{ inventory_hostname }}:2379
+initial-advertise-peer-urls: https://{{ inventory_hostname }}:2380
+initial-cluster: {{ ETCD_CLUSTER }}
+initial-cluster-token: etcd-cluster
+initial-cluster-state: {{ CLUSTER_STATE }}
+enable-v2: true
+
+client-transport-security:
+  cert-file: {{ workdir }}/etcd/ssl/server.pem
+  key-file: {{ workdir }}/etcd/ssl/server-key.pem
+  client-cert-auth: false
+  trusted-ca-file: {{ workdir }}/etcd/ssl/ca.pem
+  auto-tls: false
+
+peer-transport-security:
+  cert-file: {{ workdir }}/etcd/ssl/server.pem
+  key-file: {{ workdir }}/etcd/ssl/server-key.pem
+  client-cert-auth: false
+  trusted-ca-file: {{ workdir }}/etcd/ssl/ca.pem
+  auto-tls: false
+
+debug: false
+logger: zap
+log-outputs: [stderr]

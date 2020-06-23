@@ -1,0 +1,14 @@
+# Create some dir
+
+- name: "Make Etcd Directory"
+  hosts: masters
+  file:
+    name: "{{workdir}}/"
+    state: directory
+    recurse: true
+  with_items:
+    - etcd
+    - etcd/bin
+    - etcd/cfg
+    - etcd/ssl
+    - etcd/data

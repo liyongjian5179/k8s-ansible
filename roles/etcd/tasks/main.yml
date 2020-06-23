@@ -1,0 +1,10 @@
+---
+- name: create_dir
+  include: create_dir.yml
+  tags: create_dir
+- name: distribute_etcd
+  include: distribute_etcd.yml
+  tags: install_etcd_pkg
+- name: start_etcd
+  include: start_etcd.yml
+  tags: start_etcd

@@ -1,0 +1,18 @@
+[Unit]
+Description=Etcd Server
+Documentation=https://github.com/etcd-io/etcd
+Conflicts=etcd.service
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+LimitNOFILE=65536
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=0
+ExecStart={{ workdir }}/etcd/bin/etcd --config-file={{ workdir }}/etcd/cfg/etcd.yml
+
+[Install]
+WantedBy=multi-user.target

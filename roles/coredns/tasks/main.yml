@@ -3,15 +3,13 @@
     name: "{{ workdir }}/yamls"
     state: directory
     recurse: true
-  run_once: true
 
 - name: "Copy Coredns.yaml Files"
   template:
     src: coredns.yaml.j2
     dest: "{{workdir}}/yamls/coredns.yaml"
-    mode: 0755
 
-- name: "Run Config_network.sh"
+- name: "Run 'kubectl apply -f coredns.yaml'"
   shell:
     "kubectl apply -f coredns.yaml"
   args:

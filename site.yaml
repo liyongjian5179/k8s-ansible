@@ -46,3 +46,10 @@
   roles:
     - coredns
   tags: coredns
+
+# 安装 metrics
+- name: Install Metric Server 
+  hosts: masters
+  roles:
+    - metric-server
+  tags: metric

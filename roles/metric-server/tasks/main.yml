@@ -1,0 +1,17 @@
+- name: "Create Dir yaml"
+  file:
+    name: "{{ workdir }}/yamls"
+    state: directory
+    recurse: true
+
+- name: "Copy Metrics.yaml Files"
+  copy:
+    src: metrics.yaml.j2
+    dest: "{{workdir}}/yamls/metrics.yaml"
+
+- name: "Run 'kubectl apply -f metrics.yaml'"
+  shell:
+    "kubectl apply -f metrics.yaml"
+  args:
+    chdir: "{{ workdir }}/yamls"
+  run_once: true

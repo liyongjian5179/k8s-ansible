@@ -9,7 +9,7 @@ cert_root_dir: /opt/ssl
 
 # etcd 版本
 # https://github.com/etcd-io/etcd/releases/download/v{{etcd_version}}/etcd-v{{etcd_version}}-linux-amd64.tar.gz
-etcd_version: 3.3.19
+etcd_version: 3.4.9
 
 # kubernetes 版本
 # https://dl.k8s.io/v{{kubernetes_version}}/kubernetes-server-linux-amd64.tar.gz

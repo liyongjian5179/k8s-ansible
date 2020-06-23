@@ -2,6 +2,7 @@
   copy:
     src: "{{ package_root_dir }}/etcd/etcd-v{{ etcd_version }}-linux-amd64/{{ item }}"
     dest: "{{ workdir }}/etcd/bin"
+    mode: 0755
   with_items:
     - etcd
     - etcdctl
@@ -18,7 +19,7 @@
 
 - name: "Copy ETCD Configuration Files"
   template:
-    src: etcd-3.{{ etcd_version.split('.')[1] }}}.yml.j2
+    src: etcd-3.{{ etcd_version.split('.')[1] }}.yml.j2
     dest: "{{workdir}}/etcd/cfg/etcd.yml"
     force: true
   notify:

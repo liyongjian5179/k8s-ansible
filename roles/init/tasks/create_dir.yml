@@ -1,9 +1,8 @@
 # Create some dir
 
 - name: "Make Master Directory"
-  hosts: masters
   file:
-    name: "{{workdir}}/"
+    name: "{{workdir}}/{{ item }}"
     state: directory
     recurse: true
   with_items:
@@ -24,9 +23,8 @@
     - kubernetes/logs/kube-controller-manager
 
 - name: "Make Nodes Directory"
-  hosts: nodes
   file:
-    name: "{{workdir}}/"
+    name: "{{workdir}}/{{ item }}"
     state: directory
     recurse: true
   with_items:

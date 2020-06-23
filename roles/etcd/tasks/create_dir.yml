@@ -1,9 +1,8 @@
 # Create some dir
 
 - name: "Make Etcd Directory"
-  hosts: masters
   file:
-    name: "{{workdir}}/"
+    name: "{{workdir}}/{{ item }}"
     state: directory
     recurse: true
   with_items:

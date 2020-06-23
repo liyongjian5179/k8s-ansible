@@ -6,3 +6,9 @@ CERT_EXPIRY: "438000h"
 
 # 证书更新策略 [stay|update]
 CERT_POLICY: stay
+
+# API_SERVICE 节点列表
+API_SERVICE_NODES: '{% for h in groups["masters"] %}"{{ h }}",{% endfor %}'
+
+# ETCD 节点列表
+ETCD_NODES: '{% for h in groups["etcd"] %}"{{ h }}",{% endfor %}'

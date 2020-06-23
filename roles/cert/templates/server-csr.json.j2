@@ -1,7 +1,20 @@
 {
     "CN": "kubernetes",
     "hosts": [
-      {{ apiserver_addr }},
+{% if API_SERVICE_NODES |string() == ETCD_NODES |string() %}
+      {{ API_SERVICE_NODES }}
+{% else %}
+      {{ API_SERVICE_NODES }}
+      {{ ETCD_NODES }}
+{% endif %}
+{% if kubernetes_service_ip %}
+      "{{ kubernetes_service_ip }}",
+{% endif %}
+{% if apiserver_lb_address %}
+{% for h in apiserver_lb_address.split(',') %}
+      "{{h}}",
+{% endfor %}
+{% endif %}
       "127.0.0.1",
       "kubernetes",
       "kubernetes.default",

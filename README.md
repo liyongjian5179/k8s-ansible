@@ -19,3 +19,8 @@
 ```bash
 ansible-playbook -i inventories/hosts  site.yaml
 ```
+
+## 证书更新
+```bash
+ansible-playbook -i inventories/hosts  site.yaml -t cert  -e 'CERT_POLICY=update'
+```

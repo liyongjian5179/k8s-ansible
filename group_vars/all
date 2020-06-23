@@ -35,10 +35,24 @@ docker_version: 19.03.10
 docker_repo: http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
 # flannel规划地址网段信息
-flannel_network: '{"Network":"10.244.0.0/16", "Backend":{"Type": "vxlan"}}'
+flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
 
-# docker 加速器
+# docker 镜像加速器
 mirror_accelerator: https://ajpb7tdn.mirror.aliyuncs.com
 
-# 可访问 api-server 机器地址，用于生成证书使用
-apiserver_addr: '"10.10.10.127","10.10.10.128","10.10.10.129","10.10.10.130","lb.5179.top","10.96.0.1"'
+# pod 网段
+pod_network: 10.244.0.0/16
+
+# service 网段
+service_network: 10.96.0.0/12
+
+# kubernetes 内部地址
+kubernetes_service_ip: 10.96.0.1
+
+# coredns 地址
+coredns_service_ip: 10.96.0.10
+
+# 可访问 api-server 的 LB|NG 地址，用于生成证书
+apiserver_lb_address: 10.10.10.127,lb.5179.top
+
+

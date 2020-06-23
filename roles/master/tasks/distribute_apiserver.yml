@@ -1,6 +1,6 @@
 - name: "Copy Kube-apiserver Configuration Files"
   template:
-    src: kube-apiserver.yml.j2
+    src: kube-apiserver.j2
     dest: "{{workdir}}/kubernetes/cfg/kube-apiserver"
     
 - name: "Copy Kube-apiserver Systemd File"

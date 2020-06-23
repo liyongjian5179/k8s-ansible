@@ -5,7 +5,7 @@ KUBE_APISERVER_OPTS="--logtostderr=false \
 --bind-address=0.0.0.0 \
 --secure-port=6443 \
 --advertise-address={{ inventory_hostname }} \
---allow-privileged=true \\
+--allow-privileged=true \
 --service-cluster-ip-range={{ service_network }} \
 --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,NodeRestriction \
 --authorization-mode=RBAC,Node \

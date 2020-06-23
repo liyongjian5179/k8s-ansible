@@ -11,6 +11,9 @@
 - name: distribute_apiserver
   include: distribute_apiserver.yml
   tags: distribute_apiserver
+- name: distribute_controller_manager
+  include: distribute_controller_manager.yml
+  tags: distribute_controller_manager
 
 
   

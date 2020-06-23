@@ -1,0 +1,16 @@
+- name: "Copy Kube-controller-manager Configuration Files"
+  template:
+    src: kube-controller-manager.j2
+    dest: "{{workdir}}/kubernetes/cfg/kube-controller-manager"
+    
+- name: "Copy Kube-controller-manager Systemd File"
+  template:
+    src: kube-controller-manager.service.j2
+    dest: /usr/lib/systemd/system/kube-controller-manager.service
+
+- name: "Start Kube-controller-manager"
+  systemd:
+    name: kube--controller-manager
+    state: restarted
+    enabled: true
+    daemon-reload: true

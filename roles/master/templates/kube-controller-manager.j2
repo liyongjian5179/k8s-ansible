@@ -14,4 +14,4 @@ KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=false \
 --feature-gates=RotateKubeletClientCertificate=true \
 --allocate-node-cidrs=true \
 --cluster-cidr={{ pod_network }} \
---root-ca-file={{ workdir}}/kubernetes/ssl/ca.pem"
+--root-ca-file={{ workdir }}/kubernetes/ssl/ca.pem"

@@ -1,0 +1,16 @@
+- name: "Copy Kube-apiserver Configuration Files"
+  template:
+    src: kube-apiserver.yml.j2
+    dest: "{{workdir}}/kubernetes/cfg/kube-apiserver"
+    
+- name: "Copy Kube-apiserver Systemd File"
+  template:
+    src: kube-apiserver.service.j2
+    dest: /usr/lib/systemd/system/kube-apiserver.service
+
+- name: "Start Kube-apiserver"
+  systemd:
+    name: kube-apiserver
+    state: restarted
+    enabled: true
+    daemon-reload: true

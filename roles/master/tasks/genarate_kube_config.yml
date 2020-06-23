@@ -1,7 +1,75 @@
 - name: "Distribute K8s Kubelet Binary File To Localhost"
   copy:
-    src: "{{ package_root_dir }}/k8s/{{ etcd_version }}/kubernetes/server/bin/kubectl"
+    src: "{{ package_root_dir }}/k8s/{{ kubernetes_version }}/kubernetes/server/bin/kubectl"
     dest: "/usr/local/bin"
     mode: 0755
   connection: local 
 
+- name: "Check Token.csv Exist Or Not"
+  shell:
+    "grep kubelet {{ cert_root_dir }}/token.csv"
+  ignore_errors: true
+  register: token_csv
+  connection: local 
+
+- name: "Generate Token File"
+  lineinfile:
+    line: "{{ bootstrap_token }},kubelet-bootstrap,10001,\"system:kubelet-bootstrap\""
+    path: "{{ cert_root_dir }}/token.csv"
+    create: true
+  when: token_csv is failed
+  connection: local 
+
+- name: "Check Admin.kubeconfig Exist Or Not"
+  shell:
+    "ls {{ cert_root_dir }}/admin.kubeconfig"
+  ignore_errors: true
+  register: admin_kubeconfig
+  connection: local 
+
+- name: "Generate Admin Kubeconfig"
+  shell: |
+    kubectl config set-cluster kubernetes --certificate-authority=./ca.pem --embed-certs=true --server=https://{{ apiserver_master_addr }}:6443 --kubeconfig=admin.kubeconfig
+    kubectl config set-credentials admin --client-certificate=./admin.pem --embed-certs=true --client-key=./admin-key.pem --kubeconfig=admin.kubeconfig
+    kubectl config set-context default --cluster=kubernetes --user=admin --kubeconfig=admin.kubeconfig
+    kubectl config use-context default --kubeconfig=admin.kubeconfig
+  args:
+    chdir: "{{ cert_root_dir }}"
+  when: admin_kubeconfig is failed
+  connection: local 
+
+- name: "Check Bootstrap.kubeconfig Exist Or Not"
+  shell:
+    "ls {{ cert_root_dir }}/bootstrap.kubeconfig"
+  ignore_errors: true
+  register: bootstrap_kubeconfig
+  connection: local 
+
+- name: "Generate Bootstrap Kubeconfig"
+  shell: |
+    kubectl config set-cluster kubernetes --certificate-authority=./ca.pem --embed-certs=true --server=https://{{ apiserver_master_addr }}:6443 --kubeconfig=bootstrap.kubeconfig
+    kubectl config set-credentials kubelet-bootstrap --token={{ bootstrap_token }} --kubeconfig=bootstrap.kubeconfig
+    kubectl config set-context default --cluster=kubernetes --user=kubelet-bootstrap --kubeconfig=bootstrap.kubeconfig
+    kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
+  args:
+    chdir: "{{ cert_root_dir }}"
+  when: bootstrap_kubeconfig is failed
+  connection: local 
+
+- name: "Check Kube-proxy.kubeconfig Exist Or Not"
+  shell:
+    "ls {{ cert_root_dir }}/kube-proxy.kubeconfig"
+  ignore_errors: true
+  register: kube_proxy_kubeconfig
+  connection: local 
+
+- name: "Generate Kube-proxy Kubeconfig"
+  shell: |
+    kubectl config set-cluster kubernetes --certificate-authority=./ca.pem --embed-certs=true --server=https://{{ apiserver_master_addr }}:6443 --kubeconfig=kube-proxy.kubeconfig
+    kubectl config set-credentials kube-proxy --client-certificate=./kube-proxy.pem --client-key=./kube-proxy-key.pem  --embed-certs=true --kubeconfig=kube-proxy.kubeconfig
+    kubectl config set-context default --cluster=kubernetes --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
+    kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+  args:
+    chdir: "{{ cert_root_dir }}"
+  when: kube_proxy_kubeconfig is failed
+  connection: local 

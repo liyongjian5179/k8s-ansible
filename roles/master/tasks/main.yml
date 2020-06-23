@@ -4,7 +4,13 @@
   tags: create_dir
 - name: genarate_kube_config
   include: genarate_kube_config.yml
-
+  tags: genarate_kube_config
+- name: distribute_k8s_file
+  include: distribute_k8s_file.yml
+  tags: distribute_k8s_file
+- name: distribute_apiserver
+  include: distribute_apiserver.yml
+  tags: distribute_apiserver
 
 
   

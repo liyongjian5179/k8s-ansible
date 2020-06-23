@@ -1,6 +1,6 @@
 - name: "Start ETCD"
   systemd:
     name: etcd
-    state: started
+    state: restarted
     enabled: true
     daemon-reload: true

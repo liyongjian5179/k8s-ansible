@@ -1,0 +1,13 @@
+- name: "Make Nodes Directory"
+  file:
+    name: "{{workdir}}/{{ item }}"
+    state: directory
+    recurse: true
+  with_items:
+    - kubernetes
+    - kubernetes/bin
+    - kubernetes/cfg
+    - kubernetes/ssl
+    - kubernetes/logs
+    - kubernetes/logs/kubelet
+    - kubernetes/logs/kube-proxy

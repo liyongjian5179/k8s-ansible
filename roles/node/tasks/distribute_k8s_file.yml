@@ -1,0 +1,23 @@
+- name: "Distribute K8s Node Binary File"
+  copy:
+    src: "{{ package_root_dir }}/k8s/{{ kubernetes_version }}/kubernetes/server/bin/{{ item }}"
+    dest: "{{ workdir }}/kubernetes/bin"
+    mode: 0755
+  with_items:
+    - kubelet
+    - kube-proxy
+
+- name: "Distribute K8s Certs And Kubeconfigs"
+  copy:
+    src: "{{ cert_root_dir }}/{{ item }}"
+    dest: "{{ workdir }}/kubernetes/ssl"
+  with_items:
+    - ca.pem
+    - kube-proxy.kubeconfig
+    - bootstrap.kubeconfig
+
+- name: "Distribute Token.csv"
+  copy:
+    src: "{{ cert_root_dir }}/token.csv"
+    dest: "{{ workdir }}/kubernetes/cfg"
+

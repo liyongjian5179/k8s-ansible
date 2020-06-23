@@ -1,0 +1,19 @@
+- name: "Copy Kube-proxy Configuration Files"
+  template:
+    src: {{ item }}.j2
+    dest: "{{ workdir}}/kubernetes/cfg/{{ item }}"
+  with_items:
+    - kube-proxy.conf
+    - kube-proxy-config.yml
+
+- name: "Copy Kube-proxy Systemd File"
+  template:
+    src: kube-proxy.service.j2
+    dest: /usr/lib/systemd/system/kube-proxy.service
+
+- name: "Start Kube-proxy"
+  systemd:
+    name: kube-proxy
+    state: restarted
+    enabled: true
+    daemon-reload: true

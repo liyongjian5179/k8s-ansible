@@ -47,6 +47,9 @@ kubernetes_service_ip: 10.96.0.1
 # coredns 地址
 coredns_service_ip: 10.96.0.10
 
+# 集群域
+cluster_domain: cluster.local
+
 # 可访问 api-server 的 VIP|LB|NG 地址，用于生成证书，如果有多个则写多个，以逗号分隔
 apiserver_lb_address: 10.10.10.127,lb.5179.top
 

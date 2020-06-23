@@ -1,0 +1,8 @@
+---
+- name: create_dir
+  include: create_dir.yml
+  tags: create_dir
+- name: distribute_k8s_file
+  include: distribute_k8s_file.yml
+  tags: distribute_k8s_file
+

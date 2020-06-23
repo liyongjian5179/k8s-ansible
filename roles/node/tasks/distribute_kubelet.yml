@@ -1,0 +1,19 @@
+- name: "Copy Kubelet Configuration Files"
+  template:
+    src: {{ item }}.j2
+    dest: "{{ workdir}}/kubernetes/cfg/{{ item }}"
+  with_items:
+    - kubelet.conf
+    - kubelet-config.yml
+
+- name: "Copy Kubelet Systemd File"
+  template:
+    src: kubelet.service.j2
+    dest: /usr/lib/systemd/system/kubelet.service
+
+- name: "Start Kubelet"
+  systemd:
+    name: kubelet
+    state: restarted
+    enabled: true
+    daemon-reload: true

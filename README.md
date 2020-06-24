@@ -66,3 +66,9 @@ ansible-playbook -i inventory/hosts  site.yml -t cert  -e 'CERT_POLICY=update'
 ```bash
 ansible-playbook -i inventory/hosts new_nodes.yml
 ```
+
+## 清理集群
+
+```bash
+bash ./tools/clean.sh
+```

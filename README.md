@@ -3,9 +3,13 @@
 # 使用的版本信息如下
 
 CNI_PLUGIN_VER=0.8.6
+
 ETCD_VER=3.4.9
+
 K8S_SERVER_VER=1.18.3
+
 FLANNEL_VER=0.12.0
+
 DOCKER_VER=19.03.10  
 
 如果修改版本，需要同时修改 `group_vars/all` 文件

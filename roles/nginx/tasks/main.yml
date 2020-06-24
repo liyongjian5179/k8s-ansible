@@ -11,13 +11,15 @@
 - name: "Check Include Exist Or Not"
   shell:
     grep "tcp;" nginx.conf
+  args:
+    chdir: "/etc/nginx"
   register: nginx_include
   ignore_errors: yes
 
 - name: "Add lb.tcp To Nginx Config"
   lineinfile:
     path: /etc/nginx/nginx.conf
-    insertbefore: "include /usr/share/nginx/modules/*.conf;"
+    insertafter: "include /usr/share/nginx/modules"
     line: "include /etc/nginx/conf.d/*.tcp;"
   when: nginx_include is failed
 

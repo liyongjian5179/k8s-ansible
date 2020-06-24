@@ -1,20 +1,20 @@
 # 初始化环境
 - name: init
-  hosts: new-nodes
+  hosts: new_nodes
   roles:
     - init
   tags: init
 
 # 安装 nodes
 - name: Install Node Cluster
-  hosts: nodes
+  hosts: new_nodes
   roles:
     - node
   tags: node
 
 # 安装 flannel
 - name: Install Network Plugins
-  hosts: nodes
+  hosts: new_nodes
   roles:
     - network
   tags: network

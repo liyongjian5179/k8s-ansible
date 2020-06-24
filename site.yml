@@ -1,6 +1,6 @@
 # 安装 nginx
 - name: nginx
-  hosts: local
+  hosts: lb
   roles:
     - nginx
   tags: nginx

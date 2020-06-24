@@ -1,0 +1,13 @@
+stream {
+    upstream master {
+        hash $remote_addr consistent;
+{% for host in groups['masters'] %}
+        server {{ host }}:6443 max_fails=3 fail_timeout=30;
+{% endfor %}
+    }
+
+    server {
+        listen 6443;
+        proxy_pass master;
+    }
+}

@@ -1,0 +1,29 @@
+- name: "Install Nginx Server"
+  yum:
+    name: "nginx"
+    state: present
+
+- name: "Copy Apiserver Config"
+  template:
+    src: "lb.tcp.j2"
+    dest: "/etc/nginx/conf.d/lb.tcp"
+
+- name: "Check Include Exist Or Not"
+  shell:
+    grep "tcp;" nginx.conf
+  register: nginx_include
+  ignore_errors: yes
+
+- name: "Add lb.tcp To Nginx Config"
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    insertbefore: "include /usr/share/nginx/modules/*.conf;"
+    line: "include /etc/nginx/conf.d/*.tcp;"
+  when: nginx_include is failed
+
+- name: "Start Nginx Server"
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: true
+    daemon-reload: true

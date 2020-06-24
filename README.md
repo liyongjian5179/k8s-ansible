@@ -14,6 +14,19 @@ DOCKER_VER=19.03.10
 
 如果修改版本，需要同时修改 `group_vars/all` 文件
 
+## 机器安排
+
+| 主机名        | IP           |        角色及组件        |                         k8s 相关组件                         |
+| ------------- | ------------ | :----------------------: | :----------------------------------------------------------: |
+| centos7-nginx | 10.10.10.127 |   nginx 四层代理(主控机)   |                        nginx  ansible                             |
+| centos7-a     | 10.10.10.128 | master,node,etcd,flannel | kube-apiserver kube-controller-manager kube-scheduler kubelet kube-proxy |
+| centos7-b     | 10.10.10.129 | master,node,etcd,flannel | kube-apiserver kube-controller-manager kube-scheduler kubelet kube-proxy |
+| centos7-c     | 10.10.10.130 | master,node,etcd,flannel | kube-apiserver kube-controller-manager kube-scheduler kubelet kube-proxy |
+| centos7-d     | 10.10.10.131 |       node,flannel       |                      kubelet kube-proxy                      |
+| centos7-e     | 10.10.10.132 |       node,flannel       |                      kubelet kube-proxy                      |
+
+
+
 ## 提前下载安装包文件
 可以通过执行 `download_binary.sh` 脚本进行包的下载
 ```bash

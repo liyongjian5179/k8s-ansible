@@ -26,17 +26,25 @@
     chdir: "{{ workdir }}/yamls"
   run_once: true 
 
-- name: "Create Approve CSR clusterRoleBinding"
+- name: "Create Approve CSR ClusterRoleBinding"
   shell: |
     sleep 10
     kubectl create clusterrolebinding node-client-auto-approve-csr --clusterrole=system:certificates.k8s.io:certificatesigningrequests:nodeclient --user=kubelet-bootstrap
   run_once: true
   ignore_errors: true
 
-- name: "Create CRT Renew clusterRoleBinding"
+- name: "Create CRT Renew ClusterRoleBinding"
   shell: |
     sleep 10
     kubectl create clusterrolebinding node-client-auto-renew-crt --clusterrole=system:certificates.k8s.io:certificatesigningrequests:selfnodeclient --group=system:nodes
     kubectl create clusterrolebinding node-server-auto-renew-crt --clusterrole=system:certificates.k8s.io:certificatesigningrequests:selfnodeserver --group=system:nodes
   run_once: true
   ignore_errors: true
+
+- name: "Create kubelet-api-admin clusterRoleBinding To Access Log Or Exec"
+  shell: |
+    sleep 10
+    kubectl create clusterrolebinding kubelet-api-admin --user=kubernetes --clusterrole=cluster-admin
+  run_once: true
+  ignore_errors: true
+

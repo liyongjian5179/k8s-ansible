@@ -9,6 +9,6 @@ ansible -i ../invertory/hosts k8s -m systemd -a 'name=flanneld state=stopped ena
 ansible -i ../invertory/hosts k8s -m systemd -a 'name=docker state=stopped enabled=no'
 ansible -i ../invertory/hosts k8s -m yum -a 'name=docker state=absent'
 ansible -i ../invertory/hosts k8s -m shell -a 'rm -rf /opt/kubernetes /opt/etcd /opt/cni /etc/cni /var/run/flannel /var/lib/kubelet /etc/docker /var/lib/docker'
-ansible -i ../invertory/hosts k8s -m shell -a "rm -f /usr/lib/systemd/system/{docker,flanneld,kubelet,kube-proxy,kube-apiserver,kube-controller-manager,kube-scheduler}.service"
+ansible -i ../invertory/hosts k8s -m shell -a "rm -f /usr/lib/systemd/system/{docker,etcd,flanneld,kubelet,kube-proxy,kube-apiserver,kube-controller-manager,kube-scheduler}.service"
 ansible -i ../invertory/hosts k8s -m shell -a 'ip link set dev cni0 down; ip line set dev docker0 down'
 ansible -i ../invertory/hosts k8s -m shell -a 'ip link delete cni0; ip link delete docker0'

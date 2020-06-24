@@ -50,19 +50,19 @@ bash tools/move_pkg.sh
 
 ## 执行
 ```bash
-ansible-playbook -i inventories/hosts  site.yml
+ansible-playbook -i inventory/hosts  site.yml
 ```
 
 ## 证书更新
 第一次生成不用指定，如果要覆盖已存在的证书，用如下命令
 ```bash
-ansible-playbook -i inventories/hosts  site.yml -t cert  -e 'CERT_POLICY=update'
+ansible-playbook -i inventory/hosts  site.yml -t cert  -e 'CERT_POLICY=update'
 ```
 
 ## 增加新节点
 
-先在`invertories/hosts`的`[new-nodes]`下增加节点地址  
+先在`invertory/hosts`的`[new-nodes]`下增加节点地址  
 然后执行
 ```bash
-ansible-playbook -i inventories/hosts new_nodes.yml
+ansible-playbook -i inventory/hosts new_nodes.yml
 ```

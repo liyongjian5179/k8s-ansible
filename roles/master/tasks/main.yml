@@ -20,3 +20,6 @@
 - name: create_some_roles
   include: create_some_roles.yml
   tags: create_some_roles  
+- name: make_labels_and_tains
+  include: make_labels_and_tains.yml
+  tags: make_labels_and_tains

@@ -36,7 +36,7 @@ cgroupdriver: systemd
 mirror_accelerator: https://ajpb7tdn.mirror.aliyuncs.com
 
 # docker 存储路径,默认 /var/lib/docker
-docker_storage_path: {{ workdir }}/docker
+docker_storage_path: "{{ workdir }}/docker"
 
 # pod 网段
 pod_network: 10.244.0.0/16

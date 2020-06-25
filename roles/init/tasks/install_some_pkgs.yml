@@ -1,20 +1,21 @@
   - name: Install new packages
     yum:
-      #name: ['conntrack', 'ipvsadm', 'ipset', 'iptables-services', 'libseccomp', 'jq', 'sysstat', 'curl', 'wget', 'net-tools', 'telnet', 'vim', 'chrony', 'docker-ce-19.03.4-3.el7']
-      name: "{{ item }}"
+      name: ['conntrack', 'ipvsadm', 'ipset', 'iptables-services', 'libseccomp', 'jq', 'sysstat', 'curl', 'wget', 'net-tools', 'telnet', 'vim', 'socat']
+#
       state: present
-    with_items:
-      - conntrack
-      - ipvsadm
-      - ipset
-      - iptables-services
-      - libseccomp
-      - jq
-      - sysstat
-      - curl
-      - wget
-      - net-tools
-      - telnet
-      - vim
+#    with_items:
+#      - conntrack
+#      - ipvsadm
+#      - ipset
+#      - iptables-services
+#      - libseccomp
+#      - jq
+#      - sysstat
+#      - curl
+#      - wget
+#      - net-tools
+#      - telnet
+#      - vim
+#      - socat
 #      - chrony
 

@@ -101,8 +101,10 @@ kubectl taint nodes xxx  node-role.kubernetes.io/master=:NoSchedule
 kubectl taint nodes xxx node-role.kubernetes.io/master-
 ```
 
-## 证书更新
-第一次生成不用指定，如果要覆盖已存在的证书，用如下命令
+## 重新生成证书
+默认生成一次之后，如果不手动删除，是不会再生成新的证书的，
+
+如果想重新生成可以加上`CERT_POLICY=update`,执行如下命令的同时会对旧的证书进行备份
 ```bash
 ansible-playbook -i inventory/hosts  site.yml -t cert  -e 'CERT_POLICY=update'
 ```

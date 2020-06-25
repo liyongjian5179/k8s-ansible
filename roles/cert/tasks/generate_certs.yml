@@ -1,3 +1,10 @@
+- name: "Backup Old Certs"
+  shell:
+    mv ssl ssl-`date "+%Y-%m-%d~%H:%M:%S"` && mkdir ssl
+  args:
+    chdir: "{{ workdir }}"
+  when: (CERT_POLICY) == "update"
+
 - name: "Generate ca-config.json"
   template:
     src: ca-config.json.j2

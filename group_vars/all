@@ -1,11 +1,11 @@
 # 工作目录
 workdir: /opt
 
-# 包存放路径
-package_root_dir: /opt/pkg
+# 二进制包存放路径
+package_root_dir: "{{ workdir }}/pkg"
 
 # ansible主控机机器证书存放位置
-cert_root_dir: /opt/ssl
+cert_root_dir: "{{ workdir }}/ssl"
 
 # etcd 版本
 # https://github.com/etcd-io/etcd/releases/download/v{{etcd_version}}/etcd-v{{etcd_version}}-linux-amd64.tar.gz

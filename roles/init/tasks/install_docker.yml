@@ -12,6 +12,7 @@
     yum:
       name: ['docker-ce-{{ docker_version }}', 'docker-ce-cli-{{ docker_version }}']
       state: present
+      
   - name: Create /etc/docker Directory
     file:
       path: "{{ item }}"

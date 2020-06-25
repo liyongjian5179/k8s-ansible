@@ -78,3 +78,6 @@ flannel_network_mode: vxlan
 
 # coredns 镜像版本 注意对应关系 https://github.com/coredns/deployment/blob/master/kubernetes/CoreDNS-k8s_version.md
 coredns_image_tag: 1.6.7
+
+# kubeproxy 模式 iptables|ipvs
+kubeproxy_mode: ipvs

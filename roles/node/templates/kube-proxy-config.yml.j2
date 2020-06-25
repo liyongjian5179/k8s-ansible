@@ -6,7 +6,7 @@ clientConnection:
   kubeconfig: {{ workdir }}/kubernetes/cfg/kube-proxy.kubeconfig # 读取配置文件
 hostnameOverride: {{ inventory_hostname }} # 注册到k8s的节点名称唯一
 clusterCIDR: {{ service_network }} # service IP范围
-mode: iptables # 使用iptables模式
+mode: {{ kubeproxy_mode }} 
 
 # 使用 ipvs 模式
 #mode: ipvs # ipvs 模式

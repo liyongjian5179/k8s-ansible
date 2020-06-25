@@ -1,0 +1,15 @@
+# Support ipvs
+- name: "Copy ipvs.modules"
+  copy:
+    src: ipvs.modules
+    dest: /etc/sysconfig/modules/ipvs.modules
+    mode: 0755
+
+- name: "Load /etc/sysconfig/modules/ipvs.modules"
+  shell:
+    bash /etc/sysconfig/modules/ipvs.modules && lsmod | grep -e ip_vs -e nf_conntrack_ipv4
+  register: ipvs_status
+
+- name: "Debug IP_VS Status"
+  debug:
+    msg: "IP_VS Status: {{ ipvs_status.stdout }}"

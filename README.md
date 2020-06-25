@@ -66,6 +66,41 @@ bash tools/move_pkg.sh
 ansible-playbook -i inventory/hosts  site.yml
 ```
 
+## 给`Master`节点打上角色标签和污点
+```bash
+ansible-playbook -i inventory/hosts  site.yml -t make_master_labels_and_taints
+```
+执行完后可以看到如下
+```bash
+[root@centos7-nginx k8s-ansible]# kubectl get nodes
+NAME           STATUS   ROLES    AGE     VERSION
+10.10.10.128   Ready    master   7m48s   v1.18.3
+10.10.10.129   Ready    master   7m49s   v1.18.3
+10.10.10.130   Ready    master   7m49s   v1.18.3
+10.10.10.131   Ready    <none>   7m49s   v1.18.3
+10.10.10.132   Ready    <none>   7m49s   v1.18.3
+
+[root@centos7-nginx k8s-ansible]# kubectl describe nodes 10.10.10.128 |grep -C 3 Taints
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 25 Jun 2020 17:38:09 +0800
+Taints:             node-role.kubernetes.io/master:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  10.10.10.128
+```
+也可以手动执行
+```bash
+# 给节点打上 master 角色
+kubectl label nodes  xxx node-role.kubernetes.io/master=
+# 给节点打上 node 角色
+kubectl label nodes xxx node-role.kubernetes.io/node=
+# 打上 master 节点不可调度后，master 节点将不会运行 pod，除非容忍这个污点
+kubectl taint nodes xxx  node-role.kubernetes.io/master=:NoSchedule
+# 与上条结果相反，将 master 节点当 node 节点使用
+kubectl taint nodes xxx node-role.kubernetes.io/master-
+```
+
 ## 证书更新
 第一次生成不用指定，如果要覆盖已存在的证书，用如下命令
 ```bash

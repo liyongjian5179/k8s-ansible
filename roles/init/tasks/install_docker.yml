@@ -1,22 +1,25 @@
-  - name: Install epel-release and yum-utils packages
+  - name: Install epel-release And yum-utils Packages
     yum:
       name: ['epel-release', 'yum-utils', 'device-mapper-persistent-data', 'lvm2']
       state: present
-  - name: Add docker-ce repo
+  - name: Add docker-ce Repo
     shell: yum-config-manager --add-repo {{ docker_repo }}
 #  - name: Add kubernetes repo
 #    copy:
 #      src: kubernetes.repo
 #      dest: /etc/yum.repos.d/kubernetes.repo
-  - name: Install new packages
+  - name: Install Docker Packages
     yum:
       name: ['docker-ce-{{ docker_version }}', 'docker-ce-cli-{{ docker_version }}']
       state: present
-  - name: Create /etc/docker directory
+  - name: Create /etc/docker Directory
     file:
-      path: /etc/docker
+      path: "{{ item }}"
       state: directory  
-  - name: Copy docker daemon.json file
+    with_items:
+      - /etc/docker
+      - "{{ docker_storage_path }}"
+  - name: Copy docker daemon.json File
  #   copy:
  #     src: daemon.json
  #     dest: /etc/docker/daemon.json
@@ -24,7 +27,7 @@
       src: daemon.json.j2
       dest: /etc/docker/daemon.json
       mode: 0644
-  - name: Started docker service
+  - name: Started Docker Service
     systemd:
       name: docker
       state: started

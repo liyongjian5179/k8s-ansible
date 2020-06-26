@@ -38,13 +38,6 @@
   when: admin_kubeconfig is failed
   connection: local 
 
-- name: "Copy Admin Kubeconfig to /root/.kube/config"
-  copy:
-    src: "{{ cert_root_dir }}/admin.kubeconfig"
-    dest: /root/.kube/config
-  when: admin_kubeconfig is failed
-  connection: local 
-
 - name: "Check Bootstrap.kubeconfig Exist Or Not"
   shell:
     "ls {{ cert_root_dir }}/bootstrap.kubeconfig"

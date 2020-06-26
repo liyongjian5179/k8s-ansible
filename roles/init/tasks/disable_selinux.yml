@@ -6,3 +6,4 @@
       line: SELINUX=disabled
   - name: Exec setenforce 0 command
     shell: setenforce 0
+    ignore_errors: yes

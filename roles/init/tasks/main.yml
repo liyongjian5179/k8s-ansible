@@ -10,12 +10,12 @@
   tags: sysctl
 - include: timezone.yml
   tags: timezone
+- include: install_docker.yml
+  tags: install_docker
 - include: install_some_pkgs.yml
   tags: install_some_pkgs
 - include: support_ipvs.yml
   tags: support_ipvs
-- include: install_docker.yml
-  tags: install_docker
 - include: copy_hostfile.yml 
   tags: copy_hostfile
 

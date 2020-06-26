@@ -4,7 +4,7 @@
     kubectl label nodes {{ inventory_hostname }} node-role.kubernetes.io/master=
   ignore_errors: yes
 
-- name: "Make Role Labels to Masters"
+- name: "Make Taints to Masters"
   shell: |
     sleep 5
     kubectl taint nodes {{ inventory_hostname }}  node-role.kubernetes.io/master=:NoSchedule

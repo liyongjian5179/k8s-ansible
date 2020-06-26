@@ -25,7 +25,9 @@ DOCKER_VER=19.03.10
 | centos7-d     | 10.10.10.131 |       node,flannel       |                      kubelet kube-proxy                      |
 | centos7-e     | 10.10.10.132 |       node,flannel       |                      kubelet kube-proxy                      |
 
-
+## 注意：
+如果前端有 LB ,选用四层模式，端口 6443，同时将 site.yaml 中第 2-6 行注释。
+如果没有 LB，需要自己准备 Nginx ，尽量单独找一台机器安装 Nginx。
 
 ## 提前下载安装包文件
 可以通过执行 `download_binary.sh` 脚本进行包的下载
@@ -53,7 +55,7 @@ bash tools/move_pkg.sh
 [root@centos7-nginx k8s-ansible]# cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-10.10.10.127 centos7-nginx lb.5179.top ng.5179.top ng-inter.5179.top
+10.10.10.127 centos7-nginx lb.5179.top inner-lb.5179.top ng.5179.top ng-inner.5179.top
 10.10.10.128 centos7-a
 10.10.10.129 centos7-b
 10.10.10.130 centos7-c

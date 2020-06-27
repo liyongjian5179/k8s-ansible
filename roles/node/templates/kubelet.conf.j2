@@ -1,7 +1,7 @@
 KUBELET_OPTS="--logtostderr=false \
 --v=2 \
 --log-dir={{ workdir }}/kubernetes/logs/kubelet \
---hostname-override={{ inventory_hostname }} \
+--hostname-override={{ ansible_hostname }} \
 --kubeconfig={{ workdir }}/kubernetes/cfg/kubelet.kubeconfig \
 --bootstrap-kubeconfig={{ workdir }}/kubernetes/cfg/bootstrap.kubeconfig \
 --config={{ workdir }}/kubernetes/cfg/kubelet-config.yml \

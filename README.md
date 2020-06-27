@@ -1,6 +1,8 @@
 # k8s-ansible
 
-# 使用的版本信息如下
+使用前先根据自身情况修改 `group_vars/all` 和`inventory/hosts`文件
+
+## 使用的版本信息如下
 
 CNI_PLUGIN_VER=0.8.6
 
@@ -12,7 +14,16 @@ FLANNEL_VER=0.12.0
 
 DOCKER_VER=19.03.10  
 
-如果修改版本，需要同时修改 `group_vars/all` 文件
+## 网段信息
+
+pod 网段：10.244.0.0/16
+
+service 网段：10.96.0.0/12
+
+kubernetes 内部地址：10.96.0.1
+
+coredns 地址： 10.96.0.10
+
 
 ## 机器安排
 

@@ -1,7 +1,38 @@
+# 以下两种安装方式，任选一种即可
+
+# 方式一：
 - name: "Distribute Calicoctl Binary File"
   copy:
-    src: "{{ package_root_dir }}/Calico/{{ kubernetes_version }}/kubernetes/server/bin/{{ item }}"
+    src: "{{ package_root_dir }}/k8s/{{ calico_version }}/calicoctl"
     dest: "{{ workdir }}/kubernetes/bin"
     mode: 0755
-  with_items:
-    - kubectl
+  run_once: true
+  
+- name: "Create Calicoctl Config Dir"
+  file:
+    name: "/etc/calico"
+    state: directory
+    recurse: true
+  run_once: true
+
+- name: "Distribute Calicoctl Config File"
+  template:
+    src: calicoctl.cfg.j2
+    dest: "/etc/calico/calicoctl.cfg"
+  run_once: true
+
+# 方式二：
+
+#- name: "Create Calicoctl.yaml"
+#  template:
+#    src: calicoctl.yaml.j2
+#    dest: "{{ workdir }}/yamls/calicoctl.yaml"
+#    mode: 0644
+#  run_once: true
+#
+#- name: "Write Kubectl Command to Profile"
+#  template:
+#    src: calicoctl.sh.j2
+#    dest: /etc/profile.d/calicoctl.sh
+#    mode: 0755
+#  run_once: true

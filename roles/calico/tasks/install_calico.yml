@@ -33,8 +33,8 @@
 - name: "Install Calico By Calico.yaml" 
   shell: |
     sleep 10
-    kubectl apply -f calico-typha.yaml
+    kubectl apply -f calico.yaml
   args:
     chdir: "{{ workdir }}/yamls"
   run_once: true 
-  when: groups['nodes'] | length > 50
+  when: groups['nodes'] | length <= 50

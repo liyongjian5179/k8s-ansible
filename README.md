@@ -12,7 +12,11 @@ K8S_SERVER_VER=1.18.3
 
 FLANNEL_VER=0.12.0
 
+CALICOCTL_VER=3.15.0
+
 DOCKER_VER=19.03.10  
+
+CALICO_VER=3.15.0
 
 ## 网段信息
 
@@ -53,7 +57,8 @@ wget https://dl.k8s.io/v${K8S_SERVER_VER}/kubernetes-server-linux-amd64.tar.gz &
 wget https://github.com/etcd-io/etcd/releases/download/v${ETCD_VER}/etcd-v${ETCD_VER}-linux-amd64.tar.gz && \
 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 && \
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 && \
-wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 
+wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 &&\
+wget https://github.com/projectcalico/calicoctl/releases/download/v{CALICOCTL_VER}/calicoctl
 ```
 然后执行`tools/move_pkg.sh` 脚本对包进行解压至对应的目录
 ```bash
@@ -128,6 +133,30 @@ ansible-playbook -i inventory/hosts  site.yml -t cert  -e 'CERT_POLICY=update'
 然后执行
 ```bash
 ansible-playbook -i inventory/hosts new_nodes.yml
+```
+## 测试集群
+```
+[root@centos7-nginx k8s-ansible]# kubectl apply -f tests/myapp.yaml
+```
+然后执行如下命令进行基础功能验证
+```bash
+[root@centos7-nginx k8s-ansible]# kubectl exec -it busybox -- sh
+/ #
+/ # nslookup kubernetes
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      kubernetes
+Address 1: 10.96.0.1 kubernetes.default.svc.cluster.local
+/ # nslookup myapp
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      myapp
+Address 1: 10.102.233.224 myapp.default.svc.cluster.local
+/ #
+/ # curl myapp/hostname.html
+myapp-5cbd66595b-p6zlp
 ```
 
 ## 清理集群

@@ -31,5 +31,3 @@
     src: kubectl.sh.j2
     dest: /etc/profile.d/kubectl.sh
     mode: 0755
-
-

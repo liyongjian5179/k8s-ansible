@@ -1,5 +1,5 @@
 # 初始化环境
-- name: init
+- name: Init Environment
   hosts: new_nodes
   roles:
     - init
@@ -12,10 +12,10 @@
     - node
   tags: node
 
-# 安装 flannel
+# 安装 网路插件
 - name: Install Network Plugins
-  hosts: new_nodes
+  hosts: nodes
   roles:
-    - network
+    - { role: flannel, tags: flannel,  when: network_type == 'flannel' }
+    - { role: calico, tags: calico,  when: network_type == 'calico' }
   tags: network
-

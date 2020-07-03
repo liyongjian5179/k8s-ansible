@@ -4,6 +4,7 @@ CNI_PLUGIN_VER=0.8.6
 ETCD_VER=3.4.9
 K8S_SERVER_VER=1.18.3
 FLANNEL_VER=0.12.0
+CALICO_VER=3.15.0
 
 cd /opt/pkg/
 
@@ -21,6 +22,13 @@ if [ -f ./flannel-v${FLANNEL_VER}-linux-amd64.tar.gz ];then
     cd ./flannel/${FLANNEL_VER}/ && \
     tar xf flannel-v${FLANNEL_VER}-linux-amd64.tar.gz
     echo "[INFO] 下载 flannel 并解压完成"
+    cd - &>/dev/null
+fi
+if [ -f ./calicoctl ];then
+    mkdir -p calico/${CALICO_VER}
+    mv ./calicoctl ./calico/${CALICO_VER}/ && \
+    cd ./calico/${CALICO_VER}/ && \
+    echo "[INFO] 下载 calicoctl 完成"
     cd - &>/dev/null
 fi
 if [ -f ./kubernetes-server-linux-amd64.tar.gz ];then

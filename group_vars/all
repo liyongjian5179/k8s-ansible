@@ -7,6 +7,9 @@ package_root_dir: "{{ workdir }}/pkg"
 # ansible主控机机器证书存放位置
 cert_root_dir: "{{ workdir }}/ssl"
 
+# 默认 k8s 管理员配置文件路径
+kube_config_dir: /root/.kube
+
 # etcd 版本
 # https://github.com/etcd-io/etcd/releases/download/v{{etcd_version}}/etcd-v{{etcd_version}}-linux-amd64.tar.gz
 etcd_version: 3.4.9
@@ -19,9 +22,16 @@ kubernetes_version: 1.18.3
 # https://github.com/coreos/flannel/releases/download/v{{flannel_version}}/flannel-v{{flannel_version}}-linux-amd64.tar.gz
 flannel_version: 0.12.0
 
+# calico 版本
+# calicoctl 地址：https://github.com/projectcalico/calicoctl/releases/download/v{{calico_version}}/calicoctl
+calico_version: 3.15.0
+
 # cni-plugins 版本
 # https://github.com/containernetworking/plugins/releases/download/v{{cni_plugins_version}}/cni-plugins-linux-amd64-v{{cni_plugins_version}}.tgz
 cni_plugins_version: 0.8.6
+
+# coredns 镜像版本 注意对应关系 https://github.com/coredns/deployment/blob/master/kubernetes/CoreDNS-k8s_version.md
+coredns_image_tag: 1.6.7
 
 # docker 版本
 docker_version: 19.03.10
@@ -73,14 +83,17 @@ eviction_hard_memory: 30Mi
 # flannel规划地址网段信息
 #flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
 
-# 网络插件类型
-network_type: flannel
+# 网络插件类型 [flannel|calico]
+network_type: calico
+
+# 网卡名称
+network_adapter_name: ens33
 
 # flannel 网络模式
 flannel_network_mode: vxlan
 
-# coredns 镜像版本 注意对应关系 https://github.com/coredns/deployment/blob/master/kubernetes/CoreDNS-k8s_version.md
-coredns_image_tag: 1.6.7
+# calico 网络模式 [ipip|bgp]
+calico_network_mode: ipip
 
 # kubeproxy 模式 iptables|ipvs
 kubeproxy_mode: ipvs

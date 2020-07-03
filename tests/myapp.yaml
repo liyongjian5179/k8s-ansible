@@ -1,0 +1,63 @@
+---
+# Source: tests/busybox.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: default
+spec:
+  containers:
+  - name: busybox
+    # 确保您使用busybox:1.28 image(或更早版本)进行任何测试，最新版本有一个unpstream bug，影响nslookup的使用
+    #image: busybox:1.28
+    # 含有 curl 命令
+    image: radial/busyboxplus
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+---
+# Source: tests/myapp-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp
+  name: myapp
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: ikubernetes/myapp:v1
+        resources: {}
+        ports:
+        - name: http
+          containerPort: 80
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+# Source: tests/myapp-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myapp
+  name: myapp
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: myapp

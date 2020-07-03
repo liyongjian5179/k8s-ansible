@@ -1,6 +1,6 @@
 - name: "Copy Admin Kubeconfig to /root/.kube/config"
   copy:
     src: "{{ cert_root_dir }}/admin.kubeconfig"
-    dest: /root/.kube/config
+    dest: "{{ kube_config_dir }}/config"
   when: admin_kubeconfig is failed
   connection: local 

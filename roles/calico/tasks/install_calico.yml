@@ -1,0 +1,40 @@
+- name: "Create Dir yaml"
+  file:
+    name: "{{ workdir }}/yamls"
+    state: directory
+    recurse: true
+  run_once: true
+
+- name: "Create Calico-typha.yaml"
+  template:
+    src: calico-typha.yaml.j2
+    dest: "{{ workdir }}/yamls/calico-typha.yaml"
+    mode: 0644
+  run_once: true
+  when: groups['nodes'] | length > 50
+
+- name: "Create Calico.yaml"
+  template:
+    src: calico.yaml.j2
+    dest: "{{ workdir }}/yamls/calico.yaml"
+    mode: 0644
+  run_once: true
+  when: groups['nodes'] | length <= 50
+
+- name: "Install Calico By Calico-typha.yaml" 
+  shell: |
+    sleep 10
+    kubectl apply -f calico-typha.yaml
+  args:
+    chdir: "{{ workdir }}/yamls"
+  run_once: true 
+  when: groups['nodes'] | length > 50
+
+- name: "Install Calico By Calico.yaml" 
+  shell: |
+    sleep 10
+    kubectl apply -f calico.yaml
+  args:
+    chdir: "{{ workdir }}/yamls"
+  run_once: true 
+  when: groups['nodes'] | length <= 50

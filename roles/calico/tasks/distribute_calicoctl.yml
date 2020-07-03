@@ -3,7 +3,7 @@
 # 方式一：
 - name: "Distribute Calicoctl Binary File"
   copy:
-    src: "{{ package_root_dir }}/k8s/{{ calico_version }}/calicoctl"
+    src: "{{ package_root_dir }}/calico/{{ calico_version }}/calicoctl"
     dest: "{{ workdir }}/kubernetes/bin"
     mode: 0755
   run_once: true

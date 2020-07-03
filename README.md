@@ -16,6 +16,8 @@ CALICOCTL_VER=3.15.0
 
 DOCKER_VER=19.03.10  
 
+CALICO_VER=3.15.0
+
 ## 网段信息
 
 pod 网段：10.244.0.0/16

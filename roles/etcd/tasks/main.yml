@@ -10,3 +10,4 @@
   tags: start_etcd
 - include: config_network.yml
   tags: config_network
+  when: network_type == 'flannel'

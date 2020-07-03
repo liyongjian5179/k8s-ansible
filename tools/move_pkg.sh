@@ -23,6 +23,13 @@ if [ -f ./flannel-v${FLANNEL_VER}-linux-amd64.tar.gz ];then
     echo "[INFO] 下载 flannel 并解压完成"
     cd - &>/dev/null
 fi
+if [ -f ./calicoctl ];then
+    mkdir -p calico/${CALICO_VER}
+    mv ./calicoctl ./calico/${CALICO_VER}/ && \
+    cd ./calico/${CALICO_VER}/ && \
+    echo "[INFO] 下载 calicoctl 完成"
+    cd - &>/dev/null
+fi
 if [ -f ./kubernetes-server-linux-amd64.tar.gz ];then
     mkdir -p k8s/${K8S_SERVER_VER}
     mv kubernetes-server-linux-amd64.tar.gz ./k8s/${K8S_SERVER_VER}/ && \

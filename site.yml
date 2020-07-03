@@ -41,11 +41,12 @@
   tags: node
 
 # 安装 flannel
-- name: Install Network Plugins
+- name: Install Network Plugins --> Flannel
   hosts: nodes
   roles:
-    - network
-  tags: network
+    - flannel
+  tags: flannel
+  when: network_type is 'flannel'
 
 # 安装 coredns
 - name: Install Coredns 

@@ -5,6 +5,7 @@ CNI_PLUGIN_VER=0.8.6
 ETCD_VER=3.4.9
 K8S_SERVER_VER=1.18.3
 FLANNEL_VER=0.12.0
+CALICO_VER=3.15.0
 
 mkdir /opt/pkg 
 cd /opt/pkg 
@@ -14,7 +15,8 @@ cd /opt/pkg
 #wget https://github.com/etcd-io/etcd/releases/download/v${ETCD_VER}/etcd-v${ETCD_VER}-linux-amd64.tar.gz && \
 #wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 && \
 #wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 && \
-#wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 
+#wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64  &&\
+#wget https://github.com/projectcalico/calicoctl/releases/download/v{CALICO_VER}/calicoctl
 
 if [ -f ./cni-plugins/${CNI_PLUGIN_VER}/cni-plugins-linux-amd64-v${CNI_PLUGIN_VER}.tgz ];then
     echo "[INFO] cni-plugins 已存在"
@@ -42,6 +44,20 @@ else
         cd ./flannel/${FLANNEL_VER}/ && \
         tar xf flannel-v${FLANNEL_VER}-linux-amd64.tar.gz
         echo "[INFO] 下载 flannel 并解压完成"
+        cd - &>/dev/null
+    fi
+fi
+
+if [ -f ./calico/${CALICO_VER}/calicoctl ];then
+    echo "[INFO] calicoctl 已存在"
+else
+    wget https://github.com/projectcalico/calicoctl/releases/download/v{CALICO_VER}/calicoctl
+
+    if [ -f ./calicoctl ];then
+        mkdir -p calico/${CALICO_VER}
+        mv ./calicoctl ./calico/${CALICO_VER}/ && \
+        cd ./calico/${CALICO_VER}/ && \
+        echo "[INFO] 下载 calicoctl 完成"
         cd - &>/dev/null
     fi
 fi

@@ -14,7 +14,7 @@
 
 # 安装 网路插件
 - name: Install Network Plugins
-  hosts: nodes
+  hosts: new_nodes
   roles:
     - { role: flannel, tags: flannel,  when: network_type == 'flannel' }
     - { role: calico, tags: calico,  when: network_type == 'calico' }

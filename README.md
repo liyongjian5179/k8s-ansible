@@ -134,6 +134,30 @@ ansible-playbook -i inventory/hosts  site.yml -t cert  -e 'CERT_POLICY=update'
 ```bash
 ansible-playbook -i inventory/hosts new_nodes.yml
 ```
+## 测试集群
+```
+[root@centos7-nginx k8s-ansible]# kubectl apply -f tests/myapp.yaml
+```
+然后执行如下命令进行基础功能验证
+```bash
+[root@centos7-nginx k8s-ansible]# kubectl exec -it busybox -- sh
+/ #
+/ # nslookup kubernetes
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      kubernetes
+Address 1: 10.96.0.1 kubernetes.default.svc.cluster.local
+/ # nslookup myapp
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      myapp
+Address 1: 10.102.233.224 myapp.default.svc.cluster.local
+/ #
+/ # curl myapp/hostname.html
+myapp-5cbd66595b-p6zlp
+```
 
 ## 清理集群
 

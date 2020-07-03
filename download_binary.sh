@@ -51,7 +51,7 @@ fi
 if [ -f ./calico/${CALICO_VER}/calicoctl ];then
     echo "[INFO] calicoctl 已存在"
 else
-    wget https://github.com/projectcalico/calicoctl/releases/download/v{CALICO_VER}/calicoctl
+    wget https://github.com/projectcalico/calicoctl/releases/download/v${CALICO_VER}/calicoctl
 
     if [ -f ./calicoctl ];then
         mkdir -p calico/${CALICO_VER}

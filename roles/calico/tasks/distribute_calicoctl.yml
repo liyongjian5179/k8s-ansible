@@ -1,0 +1,7 @@
+- name: "Distribute Calicoctl Binary File"
+  copy:
+    src: "{{ package_root_dir }}/Calico/{{ kubernetes_version }}/kubernetes/server/bin/{{ item }}"
+    dest: "{{ workdir }}/kubernetes/bin"
+    mode: 0755
+  with_items:
+    - kubectl

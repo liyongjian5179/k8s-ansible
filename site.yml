@@ -1,19 +1,19 @@
-# 安装 nginx
-- name: nginx
+# 安装 nginx，如果不用可以注释掉
+- name: Nginx
   hosts: lb
   roles:
     - nginx
   tags: nginx
 
 # 初始化环境
-- name: init
+- name: Init Environment
   hosts: k8s
   roles:
     - init
   tags: init
 
 # 创建证书
-- name: cert
+- name: Create Certs
   hosts: local
   roles:
     - cert
@@ -40,13 +40,13 @@
     - node
   tags: node
 
-# 安装 flannel
-- name: Install Network Plugins --> Flannel
+# 安装 网路插件
+- name: Install Network Plugins
   hosts: nodes
   roles:
-    - flannel
-  tags: flannel
-  when: network_type is 'flannel'
+    - { role: flannel, tags: flannel,  when: network_type == 'flannel' }
+    - { role: calico, tags: calico,  when: network_type == 'calico' }
+  tags: network
 
 # 安装 coredns
 - name: Install Coredns 

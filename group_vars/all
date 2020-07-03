@@ -7,6 +7,9 @@ package_root_dir: "{{ workdir }}/pkg"
 # ansible主控机机器证书存放位置
 cert_root_dir: "{{ workdir }}/ssl"
 
+# 默认 k8s 管理员配置文件路径
+kube_config_dir: /root/.kube
+
 # etcd 版本
 # https://github.com/etcd-io/etcd/releases/download/v{{etcd_version}}/etcd-v{{etcd_version}}-linux-amd64.tar.gz
 etcd_version: 3.4.9
@@ -81,7 +84,7 @@ eviction_hard_memory: 30Mi
 #flannel_network: '{"Network":"{10.244.0.0/16}", "Backend":{"Type": "vxlan"}}'
 
 # 网络插件类型 [flannel|calico]
-network_type: flannel
+network_type: calico
 
 # 网卡名称
 network_adapter_name: ens33

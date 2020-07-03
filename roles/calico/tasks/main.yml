@@ -1,0 +1,8 @@
+---
+- name: install_calico
+  include: install_calico.yml
+  tags: install_calico
+- name: distribute_calicoctl
+  include: distribute_calicoctl.yml
+  tags: distribute_calicoctl
+

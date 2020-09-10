@@ -3,7 +3,7 @@
   # ansible-playbook -i inventory/hosts site.yml -t make_master_labels_and_taints
   setup:
   tags: [ 'make_master_labels_and_taints' ]
-  #when: ansible_facts == {}
+  when: ansible_facts == {}
 
 - name: "Make Role Labels to Masters"
   shell: |

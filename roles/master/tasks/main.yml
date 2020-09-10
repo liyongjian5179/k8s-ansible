@@ -20,9 +20,6 @@
 - name: create_some_roles
   include: create_some_roles.yml
   tags: create_some_roles  
-- name: make_master_labels_and_taints
-  include: make_master_labels_and_taints.yml
-  tags: make_master_labels_and_taints
 - name: copy_admin_config
   include: copy_admin_config.yml
   tags: copy_admin_config

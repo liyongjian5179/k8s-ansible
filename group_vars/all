@@ -16,7 +16,7 @@ etcd_version: 3.4.9
 
 # kubernetes 版本
 # https://dl.k8s.io/v{{kubernetes_version}}/kubernetes-server-linux-amd64.tar.gz
-kubernetes_version: 1.18.3
+kubernetes_version: 1.18.8
 
 # flannel 版本
 # https://github.com/coreos/flannel/releases/download/v{{flannel_version}}/flannel-v{{flannel_version}}-linux-amd64.tar.gz

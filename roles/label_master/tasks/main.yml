@@ -1,0 +1,3 @@
+- name: make_master_labels_and_taints
+  include: make_master_labels_and_taints.yml
+  tags: make_master_labels_and_taints

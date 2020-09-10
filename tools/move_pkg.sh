@@ -2,7 +2,7 @@
 
 #cni_plugins_version=0.8.6
 #etcd_version=3.4.9
-#kubernetes_version=1.18.3
+#kubernetes_version=1.18.8
 #flannel_version=0.12.0
 #calico_version=3.15.0
 

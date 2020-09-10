@@ -1,0 +1,18 @@
+- name: "Gather Facts to Set ansible_hostname"
+  # This setup mode for gather facts, then the following command can run alone, if we need to
+  # ansible-playbook -i inventory/hosts site.yml -t make_master_labels_and_taints
+  setup:
+  tags: [ 'make_master_labels_and_taints' ]
+  #when: ansible_facts == {}
+
+- name: "Make Role Labels to Masters"
+  shell: |
+    sleep 5
+    kubectl label nodes {{ ansible_hostname }} node-role.kubernetes.io/master=
+  ignore_errors: yes
+
+- name: "Make Taints to Masters"
+  shell: |
+    sleep 5
+    kubectl taint nodes {{ ansible_hostname }}  node-role.kubernetes.io/master=:NoSchedule
+  ignore_errors: yes

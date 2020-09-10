@@ -61,3 +61,10 @@
   roles:
     - metrics-server
   tags: metrics
+
+# 给 masters 节点打标签和污点
+- name: Masters -> Label and Tains
+  hosts: masters
+  roles:
+    - label_master
+  tags: make_master_labels_and_taints

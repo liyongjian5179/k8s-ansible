@@ -56,8 +56,10 @@ coredns 地址： 10.96.0.10
 | centos7-e     | 10.10.10.132 |       node,flannel       |                      kubelet kube-proxy                      |
 
 ## 注意：
-如果前端有 LB ,选用四层模式，端口 6443，同时将 site.yaml 中第 2-6 行注释。
+如果前端有 LB ,选用四层模式，端口 6443，同时将 site.yaml 中第 2-6 行注释。同时 Masters 中的机器也可以做主控机
+
 如果没有 LB，需要自己准备 Nginx ，尽量单独找一台机器安装 Nginx。
+
 
 ## 提前下载安装包文件
 可以通过执行 `download_binary.sh` 脚本进行包的下载
@@ -147,6 +149,9 @@ ansible-playbook -i inventory/hosts  site.yml -t cert  -e 'CERT_POLICY=update'
 ## 增加新节点
 
 先在`invertory/hosts`的`[new-nodes]`下增加节点地址  
+
+然后做免秘钥登陆，修改主机名，同时修改主控机`/etc/hosts` 文件，增加该信息
+
 然后执行
 ```bash
 ansible-playbook -i inventory/hosts new_nodes.yml

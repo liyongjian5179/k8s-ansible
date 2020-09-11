@@ -28,6 +28,7 @@
   args:
     chdir: "{{ workdir }}/yamls"
   run_once: true 
+  ignore_errors: true
   when: groups['nodes'] | length > 50
 
 - name: "Install Calico By Calico.yaml" 
@@ -37,4 +38,5 @@
   args:
     chdir: "{{ workdir }}/yamls"
   run_once: true 
+  ignore_errors: true
   when: groups['nodes'] | length <= 50

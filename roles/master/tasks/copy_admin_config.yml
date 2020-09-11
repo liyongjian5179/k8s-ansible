@@ -3,4 +3,5 @@
     src: "{{ cert_root_dir }}/admin.kubeconfig"
     dest: "{{ kube_config_dir }}/config"
   when: admin_kubeconfig is failed
-  connection: local 
+  connection: local
+  run_once: true 

@@ -75,7 +75,7 @@ wget https://github.com/etcd-io/etcd/releases/download/v${ETCD_VER}/etcd-v${ETCD
 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 && \
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 && \
 wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 &&\
-wget https://github.com/projectcalico/calicoctl/releases/download/v{CALICOCTL_VER}/calicoctl
+wget https://github.com/projectcalico/calicoctl/releases/download/v${CALICOCTL_VER}/calicoctl
 ```
 然后执行`tools/move_pkg.sh` 脚本对包进行解压至对应的目录
 ```bash

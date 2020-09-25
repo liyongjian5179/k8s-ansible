@@ -87,7 +87,7 @@ eviction_hard_memory: 30Mi
 network_type: calico
 
 # 网卡名称
-network_adapter_name: ens33
+network_adapter_name: eth0
 
 # flannel 网络模式
 flannel_network_mode: vxlan

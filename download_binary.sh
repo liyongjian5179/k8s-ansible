@@ -9,7 +9,7 @@
 
 cni_plugins_version=$(awk '/^cni_plugins_version/ {print $2}' ./group_vars/all)
 etcd_version=$(awk '/^etcd_version/ {print $2}' ./group_vars/all)
-kubernetes_version=$(awk '/^etcd_version/ {print $2}' ./group_vars/all)
+kubernetes_version=$(awk '/^kubernetes_version/ {print $2}' ./group_vars/all)
 flannel_version=$(awk '/^flannel_version/ {print $2}' ./group_vars/all)
 calico_version=$(awk '/^calico_version/ {print $2}' ./group_vars/all)
 network_type=$(awk '/^network_type/ {print $2}' ./group_vars/all)
